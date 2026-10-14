@@ -1,0 +1,12 @@
+{
+  "name": "mcp-authscan",
+  "version": "1.0.0",
+  "description": "Static vulnerability detector for OAuth/auth failures in MCP servers",
+  "main": "index.js",
+  "bin": {
+    "mcp-authscan": "./bin/cli.js"
+  },
+  "author": "Leroy <lhmisme2011@gmail.com>",
+  "license": "MIT",
+  "keywords": ["mcp", "security", "oauth", "vulnerability", "scanner"]
+}

@@ -1,0 +1,21 @@
+# Authentik OAuth2 Redirect URI REGEX Bypass
+
+**Advisory ID:** GHSA-vxjr-h594-2hmp
+**Date Reported:** 2026-10-09
+**Status:** Under Review (90-day disclosure window)
+**Severity:** HIGH (CVSS 8.2)
+**Type:** CWE-601 (URL Redirection to Untrusted Site)
+**Impact:** Account Takeover
+
+## Vulnerability Summary
+Authentik's OAuth2 provider allows REGEX matching for redirect URIs, violating RFC 6749's exact-match requirement. Misconfigured wildcard patterns (e.g., `https://example\.com/.*`) enable open redirect attacks leading to authorization code theft and account takeover.
+
+## Key Details
+- File: authentik/providers/oauth2/views/authorize.py (Line 261)
+- File: authentik/providers/oauth2/token/base.py (Line 192)
+- Impact: Complete user account compromise
+- Requires: Admin misconfiguration + user interaction
+
+## Status
+- Reported: 2026-10-09 03:21 UTC
+- Response Expected: By 2027-01-07 (90 days)

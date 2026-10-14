@@ -1,0 +1,11 @@
+[
+  {
+    "arm": "3",
+    "trial": 0,
+    "trace": "traces/aos011/arm3_trial000.json",
+    "Q1": null,
+    "Q2": null,
+    "OUTCOME": null,
+    "judge_raw": "judge API_ERROR 401: {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-.... You can find your API key at https://platform.openai.com/account/api-keys.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"invalid_api_key\",\n    \"param\": null\n  },\n  \"status\": 401\n}"
+  }
+]

@@ -1,0 +1,3 @@
+[0;34m[*][0m Scanning: https://api.plane.so
+[0;32m[+][0m ZERO-AUTH: / (HTTP 200)
+[0;34m[*][0m Done. Results in zero-auth-findings.txt

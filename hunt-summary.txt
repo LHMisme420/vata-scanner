@@ -1,0 +1,26 @@
+=== HUNT THE HUNTERS: Phase 4B Results ===
+
+**Hunt Duration:** 08:54-09:00 EDT (6 minutes)
+**Targets Scanned:** 3 (Anthropic SDK, TS SDK, Google Cloud MCP)
+**Vulnerabilities Found:** 1 HIGH (VATA-007)
+
+VATA-007: Bearer Token Timing Attack
+├─ Location: anthropic-sdk/docs_src/authorization/tutorial001.py
+├─ Severity: HIGH (CVSS 7.5)
+├─ Pattern: TokenVerifier.get() uses == (not timing-safe)
+├─ Impact: Attacker can brute-force tokens via timing side-channel
+└─ Fix: Use hmac.compare_digest() for token comparison
+
+KEY INSIGHT:
+The vulnerability exists in the OFFICIAL EXAMPLE provided in the SDK docs.
+Any developer copying this pattern inherits the vulnerability.
+This is a "vendor hubris" case: claiming security while providing insecure examples.
+
+NEXT TARGETS:
+1. Check MCPJungle examples (mentioned in FILE1 as vulnerable)
+2. Check other gateway implementations on GitHub
+3. Verify if production Anthropic deployments use the same pattern
+
+FILES CREATED:
+- ~/vata/VATA-007-finding.md (detailed report)
+- ~/vata/hunt-summary.txt (this summary)

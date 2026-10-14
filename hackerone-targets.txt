@@ -1,0 +1,15 @@
+https://api.stripe.com
+https://api.github.com
+https://api.slack.com
+https://api.shopify.com
+https://api.twilio.com
+https://api.uber.com
+https://api.airbnb.com
+https://api.dropbox.com
+https://api.pinterest.com
+https://api.paypal.com
+https://api.adobe.com
+https://api.zoom.com
+https://api.okta.com
+https://api.auth0.com
+https://api.mailchimp.com

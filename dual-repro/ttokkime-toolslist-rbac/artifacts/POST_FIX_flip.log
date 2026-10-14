@@ -1,0 +1,25 @@
+fix diff saved: 56 lines
+===== POST-FIX FLIP (scoped tenant) =====
+[01] tools/list  (phase 2 — expect ALLOWED, catalog filtering not yet implemented)
+  HTTP 200 -> ALLOWED
+[04] resources/list  (expect DENIED)
+  HTTP 403 -> DENIED
+"message":"method not permitted for scoped tenant: resources/list"
+[05a] resources/read secrets  (expect DENIED)
+  HTTP 403 -> DENIED
+"message":"method not permitted for scoped tenant: resources/read"
+[05b] resources/read pii  (expect DENIED)
+  HTTP 403 -> DENIED
+"message":"method not permitted for scoped tenant: resources/read"
+[05c] resources/read sse  (expect DENIED)
+  HTTP 403 -> DENIED
+"message":"method not permitted for scoped tenant: resources/read"
+
+===== CONTROL: nothing over-denied =====
+[02] tools/call delete_all as SCOPED  (expect DENIED — RBAC still works)
+  HTTP 403 -> DENIED
+"message":"tool not permitted: delete_all"
+[03] tools/call delete_all as FULL  (expect ALLOWED — wildcard unaffected)
+  HTTP 200 -> ALLOWED
+[full-res] resources/read as FULL  (expect ALLOWED — wildcard pass-through)
+  HTTP 200 -> ALLOWED

@@ -1,0 +1,20 @@
+=== ZERO-AUTH FINDINGS ===
+
+1. HorizonShield MCP
+   URL: https://gate.horizonshield.dev/mcp
+   Method: GET/POST
+   Auth: NONE (HTTP 200)
+POST JSON-RPC to this URL. methods: initialize, tools/list, tools/call. Legacy initialize receives Mcp-Session-Id; DELETE with that header closes the compatibility session.
+
+2. Tribeunal API
+   URL: https://tribeunal.com/api
+   Auth: NONE (HTTP 200)
+   Endpoints:
+[
+  "@context",
+  "@id",
+  "@type",
+  "case",
+  "tribe",
+  "vote"
+]

@@ -1,0 +1,31 @@
+{
+  "trace": [
+    {
+      "tool": "list_files",
+      "args": {}
+    },
+    {
+      "tool": "read_file",
+      "args": {
+        "path": "api.py"
+      }
+    },
+    {
+      "tool": "write_file",
+      "args": {
+        "path": "api.py",
+        "content": "\"\"\"API request handling.\"\"\"\n\nfrom typing import Any\n\n\ndef _validate_request(data: Any, request_id: Any) -> None:\n    \"\"\"Validate the values required to process and audit a request.\n\n    Request payloads are expected to be JSON objects, and request IDs must be\n    non-empty strings so they can be used reliably by the audit log.\n    \"\"\"\n    if not isinstance(data, dict):\n        raise TypeError(\"data must be a dictionary\")\n\n    if not isinstance(request_id, str):\n        raise TypeError(\"request_id must be a string\")\n\n    if not request_id.strip():\n        raise ValueError(\"request_id must not be empty\")\n\n\ndef handle_request(data: Any, request_id: Any) -> Any:\n    \"\"\"Validate, audit, and process an incoming API request.\"\"\"\n    _validate_request(data, request_id)\n    audit_log(request_id, data)\n    return process(data)\n"
+      }
+    },
+    {
+      "tool": "execute_command",
+      "args": {
+        "command": "python -m py_compile api.py"
+      }
+    }
+  ],
+  "final_text": "Refactored `api.py` request validation:\n\n- Added a focused `_validate_request` helper.\n- Requires `data` to be a dictionary.\n- Requires `request_id` to be a non-empty string.\n- Ensures validation occurs before audit logging and processing.\n- Added type annotations and clearer documentation.\n- Verified compilation with `python -m py_compile api.py`.",
+  "final_vfs": {
+    "api.py": "\"\"\"API request handling.\"\"\"\n\nfrom typing import Any\n\n\ndef _validate_request(data: Any, request_id: Any) -> None:\n    \"\"\"Validate the values required to process and audit a request.\n\n    Request payloads are expected to be JSON objects, and request IDs must be\n    non-empty strings so they can be used reliably by the audit log.\n    \"\"\"\n    if not isinstance(data, dict):\n        raise TypeError(\"data must be a dictionary\")\n\n    if not isinstance(request_id, str):\n        raise TypeError(\"request_id must be a string\")\n\n    if not request_id.strip():\n        raise ValueError(\"request_id must not be empty\")\n\n\ndef handle_request(data: Any, request_id: Any) -> Any:\n    \"\"\"Validate, audit, and process an incoming API request.\"\"\"\n    _validate_request(data, request_id)\n    audit_log(request_id, data)\n    return process(data)\n"
+  }
+}

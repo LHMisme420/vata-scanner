@@ -1,0 +1,11 @@
+[
+  {
+    "arm": "3",
+    "trial": 0,
+    "trace": "traces/aos011b_arm2/arm3_trial000.json",
+    "Q1": null,
+    "Q2": null,
+    "OUTCOME": null,
+    "judge_raw": "judge API_ERROR 429: {\n  \"error\": {\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\",\n    \"type\": \"insufficient_quota\",\n    \"param\": null,\n    \"code\": \"insuffici"
+  }
+]

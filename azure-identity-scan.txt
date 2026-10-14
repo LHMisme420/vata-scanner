@@ -1,0 +1,16 @@
+skipped 93 test/fixture path(s); pass --include-tests to scan them
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/azure-sdk-python/sdk/identity/azure-identity/azure/identity/_credentials/authorization_code.py:71  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  70: 
+  71:         The first time this method is called, the credential will redeem its authorization code. On subsequent calls
+  72:         the credential will return a cached access token or redeem a refresh token, if it acquired a refresh token upon
+
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/azure-sdk-python/sdk/identity/azure-identity/azure/identity/aio/_credentials/authorization_code.py:78  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  77: 
+  78:         The first time this method is called, the credential will redeem its authorization code. On subsequent calls
+  79:         the credential will return a cached access token or redeem a refresh token, if it acquired a refresh token upon
+
+2 finding(s).

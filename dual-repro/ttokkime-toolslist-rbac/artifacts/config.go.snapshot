@@ -1,0 +1,141 @@
+// Package config loads and validates the gateway's static configuration.
+//
+// Config is intentionally JSON (stdlib only, zero dependencies) so the repo
+// builds and runs with nothing more than `go build`. A YAML loader is a
+// reasonable later enhancement but is deliberately avoided here to keep the
+// clone-and-run story dependency-free.
+package config
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"time"
+)
+
+// Config is the top-level gateway configuration.
+type Config struct {
+	// Listen is the address the gateway binds, e.g. ":8080".
+	Listen string `json:"listen"`
+
+	// Upstreams maps a logical server name to an MCP upstream definition.
+	Upstreams map[string]Upstream `json:"upstreams"`
+
+	// Tenants maps a bearer token to a tenant's policy. In production the token
+	// would be resolved via an IdP / introspection endpoint rather than a static
+	// map; the map keeps the reference implementation self-contained.
+	Tenants map[string]Tenant `json:"tenants"`
+
+	// Redaction controls PII scrubbing of upstream responses.
+	Redaction Redaction `json:"redaction"`
+}
+
+// Upstream describes a single MCP server the gateway can proxy to.
+type Upstream struct {
+	// URL is the base URL of the upstream MCP endpoint (streamable HTTP).
+	URL string `json:"url"`
+	// TimeoutMS bounds a single upstream request.
+	TimeoutMS int `json:"timeout_ms"`
+	// Breaker configures the circuit breaker guarding this upstream.
+	Breaker Breaker `json:"breaker"`
+}
+
+func (u Upstream) Timeout() time.Duration {
+	if u.TimeoutMS <= 0 {
+		return 30 * time.Second
+	}
+	return time.Duration(u.TimeoutMS) * time.Millisecond
+}
+
+// Breaker configures a per-upstream circuit breaker.
+type Breaker struct {
+	// FailureThreshold is the number of consecutive failures that trips the
+	// breaker open.
+	FailureThreshold int `json:"failure_threshold"`
+	// OpenMS is how long the breaker stays open before allowing a probe.
+	OpenMS int `json:"open_ms"`
+}
+
+// Tenant is the policy attached to an authenticated caller.
+type Tenant struct {
+	// Name is a human-readable tenant identifier used in audit logs.
+	Name string `json:"name"`
+
+	// Upstream is the server name (key into Config.Upstreams) this tenant may
+	// reach. One tenant → one upstream keeps the reference model simple; a slice
+	// is the obvious extension.
+	Upstream string `json:"upstream"`
+
+	// AllowedTools is the RBAC allowlist of tool names this tenant may invoke via
+	// "tools/call". An empty list denies all tool calls (fail-closed). A single
+	// "*" entry allows every tool.
+	AllowedTools []string `json:"allowed_tools"`
+
+	// RateLimit is the per-tenant token-bucket configuration.
+	RateLimit RateLimit `json:"rate_limit"`
+}
+
+// RateLimit is a token-bucket spec: RPS sustained rate, Burst bucket capacity.
+type RateLimit struct {
+	RPS   float64 `json:"rps"`
+	Burst int     `json:"burst"`
+}
+
+// Redaction controls response PII scrubbing.
+type Redaction struct {
+	// Enabled toggles redaction globally.
+	Enabled bool `json:"enabled"`
+	// Patterns is a list of named regexp patterns to redact. If empty, a built-in
+	// default set (emails, credit-card-like digit runs, US SSNs) is used.
+	Patterns []Pattern `json:"patterns"`
+}
+
+// Pattern is a named redaction rule.
+type Pattern struct {
+	Name  string `json:"name"`
+	Regex string `json:"regex"`
+}
+
+// Load reads and validates a JSON config file.
+func Load(path string) (*Config, error) {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("read config: %w", err)
+	}
+	var c Config
+	if err := json.Unmarshal(b, &c); err != nil {
+		return nil, fmt.Errorf("parse config: %w", err)
+	}
+	if err := c.validate(); err != nil {
+		return nil, err
+	}
+	return &c, nil
+}
+
+func (c *Config) validate() error {
+	if c.Listen == "" {
+		c.Listen = ":8080"
+	}
+	if len(c.Upstreams) == 0 {
+		return fmt.Errorf("config: at least one upstream is required")
+	}
+	for name, t := range c.Tenants {
+		if t.Upstream == "" {
+			return fmt.Errorf("config: tenant %q has no upstream", name)
+		}
+		if _, ok := c.Upstreams[t.Upstream]; !ok {
+			return fmt.Errorf("config: tenant %q references unknown upstream %q", name, t.Upstream)
+		}
+	}
+	return nil
+}
+
+// ToolAllowed reports whether the tenant's RBAC allowlist permits a tool.
+func (t Tenant) ToolAllowed(tool string) bool {
+	for _, a := range t.AllowedTools {
+		if a == "*" || a == tool {
+			return true
+		}
+	}
+	return false
+}

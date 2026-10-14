@@ -1,0 +1,23 @@
+=== VATA HUNTING SESSION - 2026-10-09 ===
+
+TARGETS TESTED: 20+
+FINDINGS: 1 CRITICAL
+
+CRITICAL FINDING:
+- Target: https://gate.horizonshield.dev/mcp
+- Vulnerability: Complete zero-auth on MCP endpoint
+- Impact: 6 callable tools exposed without authentication
+- Status: DOCUMENTED & READY FOR DISCLOSURE
+
+NEXT STEPS:
+1. Email security@horizonshield.dev (30-day disclosure window)
+2. Push to GitHub (when GitHub access resolved)
+3. Upload to Zenodo for VATA portfolio
+4. Public disclosure: 2026-12-09 (90 days)
+
+METHODOLOGY VALIDATED:
+✓ Scanner tool working
+✓ POC framework working
+✓ Targeting strategy effective
+✓ Real vulnerability discovered and documented
+

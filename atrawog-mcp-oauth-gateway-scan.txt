@@ -1,0 +1,9 @@
+skipped 105 test/fixture path(s); pass --include-tests to scan them
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/atrawog-mcp-oauth-gateway/scripts/mcp_healthcheck.py:51  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  50:     try:
+  51:         response = requests.post(url, json=payload, headers=headers, timeout=timeout)
+  52:         response_text = response.text
+
+1 finding(s).

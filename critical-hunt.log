@@ -1,0 +1,31 @@
+[*] HUNTING CRITICAL ZERO-AUTH DATA EXPOSURE
+
+[*] https://api.modal.com - DEEP HUNT
+[!!!] CRITICAL: https://api.modal.com/user (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/account (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/workspace (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/projects (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/models (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/runs (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/jobs (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/history (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/logs (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/database (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/export (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/backup (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/keys (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/secrets (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/tokens (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/webhooks (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/billing (HTTP 200)
+[!!!] CRITICAL: https://api.modal.com/usage (HTTP 200)
+
+[*] https://api.together.ai - DEEP HUNT
+
+[*] https://api.replicate.com - DEEP HUNT
+
+[*] https://api.huggingface.co - DEEP HUNT
+
+[*] https://api.groq.com - DEEP HUNT
+
+[*] https://api.runpod.io - DEEP HUNT

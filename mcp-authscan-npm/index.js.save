@@ -1,0 +1,54 @@
+fs = require('fs');
+const path = require('path');
+
+class OAuthScanner {
+  constructor() {
+    this.findings = [];
+  }
+
+  scan(directory) {
+    const files = this.getFiles(directory);
+    for (const file of files) {
+      const content = fs.readFileSync(file, 'utf-8');
+      this.scanFile(file, content);
+    }
+    return this.findings;
+  }
+
+  getFiles(dir) {
+    let files = [];
+    try {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        if (entry.name.startsWith('.')) continue;
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          files = files.concat(this.getFiles(fullPath));
+        } else if (['.go', '.ts', '.js', '.py'].includes(path.extname(entry.name))) {
+          files.push(fullPath);
+        }
+      }
+    } catch (e) {}
+    return files;
+  }
+
+  scanFile(file, content) {
+    if (content.match(/redirect_uri.*req\.query/i)) {
+      this.findings.push({ file, vuln: 'Unvalidated redirect_uri' });
+    }
+    if (content.match(/skipPkceValidation.*true/i)) {
+      this.findings.push({ file, vuln: 'Missing PKCE' });
+    }
+  }
+
+  report() {
+    if (this.findings.length === 0) {
+      console.log('✓ No vulnerabilities');
+      return;
+    }
+    console.log(`Found ${this.findings.length} issues:`);
+    this.findings.forEach(f => console.log(`  ${f.vuln} in ${f.file}`));
+  }
+}
+
+module.exports = OAuthScanner;

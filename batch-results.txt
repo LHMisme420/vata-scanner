@@ -1,0 +1,2 @@
+[REDIRECT-200] http://www.w3.org/2000/svg: 301 → 200
+[ZERO-AUTH] https://schema.org: HTTP 200

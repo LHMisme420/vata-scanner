@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# VATA repro harness — fill the PROBE section. Writes receipts to human/.
+set -uo pipefail
+A="$(cd "$(dirname "$0")/artifacts" && pwd)"
+H="$(cd "$(dirname "$0")/human" && pwd)"
+SRC="__TARGET_REPO__"
+
+# build + start target (edit build targets / flags per project)
+( cd "$SRC" && go build -o /tmp/target ./cmd/... ) || { echo "BUILD FAILED"; exit 1; }
+pkill -f '/tmp/target' 2>/dev/null; sleep 0.3
+/tmp/target __FLAGS__ >/tmp/target.log 2>&1 &
+trap 'pkill -f "/tmp/target" 2>/dev/null' EXIT
+for i in $(seq 1 15); do curl -sf __HEALTH_URL__ >/dev/null && break; sleep 0.2; done
+
+# verdict helper: 200 + no denial string = ALLOWED
+verdict(){ if [ "$2" = "200" ] && ! grep -qi 'not permitted\|unauthorized\|forbidden' "$1"; then echo ALLOWED; else echo DENIED; fi; }
+hit(){ curl -s -o "$1" -w '%{http_code}' "${@:2}"; }
+
+echo "===== PROBES ====="
+# --- PROBE 01: <describe> ---
+# c=$(hit "$H/01_<name>.json" -H 'Authorization: Bearer <tok>' -d '<json>' __ENDPOINT__)
+# echo "01 <name> -> HTTP $c -> $(verdict "$H/01_<name>.json" "$c")"
+
+echo "===== CONTROL (prove nothing over-/under-denied) ====="
+# mirror each finding with a should-be-opposite case

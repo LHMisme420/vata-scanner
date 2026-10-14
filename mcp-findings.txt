@@ -1,0 +1,32 @@
+[*] MCP VULNERABILITY FINDER
+
+[*] DEEP SCAN: playwright-mcp
+
+[*] Server initialization...
+/tmp/playwright-mcp/update-readme.js
+/tmp/playwright-mcp/tests/testserver/index.ts
+/tmp/playwright-mcp/tests/library.spec.ts
+[*] Checking endpoints for missing auth...
+[*] Looking for weak/default auth...
+/tmp/playwright-mcp/utils/docker/build.sh:  echo "  NPMRC_SECRET         path to an .npmrc to use for 'npm ci' inside the image (BuildKit secret)"
+/tmp/playwright-mcp/utils/docker/build.sh:# secret, so the (possibly authenticated) .npmrc never lands in an image layer.
+/tmp/playwright-mcp/utils/docker/build.sh:  SECRET_ARGS+=(--secret "id=npmrc,src=${NPMRC_SECRET}")
+/tmp/playwright-mcp/update-readme.js:  if (prefix === 'secrets')
+/tmp/playwright-mcp/config.d.ts:  secrets?: Record<string, string>;
+
+[*] DEEP SCAN: chrome-devtools-mcp
+
+[*] Server initialization...
+/tmp/chrome-devtools-mcp/tests/utils/url.test.ts
+/tmp/chrome-devtools-mcp/tests/utils/id.test.ts
+/tmp/chrome-devtools-mcp/tests/utils/WaitForHelper.test.ts
+[*] Checking endpoints for missing auth...
+/tmp/chrome-devtools-mcp/src/third_party/lighthouse-devtools-mcp-bundle.js:    domains: ["*.carcloud.co.uk"] }, { name: "Cardlytics", category: "ad", domains: ["*.cardlytics.com"] }, { name: "Cardosa Enterprises", category: "analytics", domains: ["*.y-track.com"], totalExecutionTime: 778, totalOccurrences: 17 }, { name: "Caspian Media", category: "ad", domains: ["*.caspianmedia.com"] }, { name: "Cast", category: "utility", domains: ["*.cast.rocks"] }, { name: "Catch", category: "other", domains: ["*.getcatch.com"], examples: ["app.getcatch.com", "assets.getcatch.com", "js.getcatch.com"], totalExecutionTime: 18282, totalOccurrences: 40 }, { name: "Cavisson", category: "analytics", domains: ["*.cavisson.com"] }, { name: "Cedato", category: "ad", domains: ["*.algovid.com", "*.vdoserv.com"] }, { name: "Celebrus Technologies", category: "analytics", domains: ["*.celebrus.com"] }, { name: "Celtra", category: "ad", domains: ["*.celtra.com"], totalExecutionTime: 369517, totalOccurrences: 427 }, { name: "Centro", category: "ad", domains: ["*.brand-server.com"] }, { name: "\
+[*] Looking for weak/default auth...
+/tmp/chrome-devtools-mcp/src/utils/url.ts:      parsed.password,
+/tmp/chrome-devtools-mcp/src/tools/input.ts:  description: `Fill out multiple form elements (inputs, selects, checkboxes, radios) at once. ALWAYS prefer this tool over multiple individual 'fill' or 'click' calls when interacting with forms. It is significantly faster, more reliable, and reduces turn count. Example: Fill username, password, and check "Remember Me" in one call.`,
+/tmp/chrome-devtools-mcp/src/third_party/lighthouse-devtools-mcp-bundle.js:em","menuitemcheckbox","menuitemradio","option","radio","switch","tab"]},buttonType:{matches:{properties:{type:["button","submit","reset"]}},namingMethods:["valueText","titleText","buttonDefaultText"]},checkboxPressed:{matches:{properties:{type:"checkbox"},attributes:{"aria-pressed":"/.*/"}},allowedRoles:["button","menuitemcheckbox","option","switch"],implicitAttrs:{"aria-checked":"false"}},checkbox:{matches:{properties:{type:"checkbox"},attributes:{"aria-pressed":null}},allowedRoles:["menuitemcheckbox","option","switch"],implicitAttrs:{"aria-checked":"false"}},noRoles:{matches:{properties:{type:["color","date","datetime-local","file","month","number","password","range","reset","submit","time","week"]}},allowedRoles:!1},hidden:{matches:{properties:{type:"hidden"}},contentTypes:["flow"],allowedRoles:!1,noAriaAttrs:!0},image:{matches:{properties:{type:"image"}},allowedRoles:["link","menuitem","menuitemcheckbox","menuitemradio","radio","switch"],namingMethods:["altText","valueText","label\
+/tmp/chrome-devtools-mcp/src/third_party/lighthouse-devtools-mcp-bundle.js:le","hidden","image","password","radio","reset","submit"],Bd=function(e){var t=(e=e instanceof ha?e:jl(e)).props.nodeName;return"textarea"===t||"input"===t&&!Id.includes((e.attr("type")||"").toLowerCase())},jd=function(e){return"select"===(e=e instanceof ha?e:jl(e)).props.nodeName},Ld=function(e){return"textbox"===Yc(e)},qd=function(e){return"listbox"===Yc(e)},zd=function(e){return"combobox"===Yc(e)},Vd=["progressbar","scrollbar","slider","spinbutton"],Gd=function(e){return e=Yc(e),Vd.includes(e)},$d=["textbox","progressbar","scrollbar","slider","spinbutton","combobox","listbox"],Hd={nativeTextboxValue:function(e){return e=sm(e).vNode,Bd(e)&&e.props.value||""},nativeSelectValue:function(e){if(e=sm(e).vNode,!jd(e))return"";var t=(e=Om(e,"option")).filter(function(e){return e.props.selected});return t.length||t.push(e[0]),t.map(function(e){return Pd(e)}).join(" ")||""},ariaTextboxValue:function(e){var t=(e=sm(e)).vNode;e=e.domNode;return Ld(t)?e&&Ns(e)?e.textContent:Pd(t,!0):""},ariaList\
+/tmp/chrome-devtools-mcp/src/third_party/lighthouse-devtools-mcp-bundle.js:d","current-password","organization-title","organization","street-address","address-line1","address-line2","address-line3","address-level4","address-level3","address-level2","address-level1","country","country-name","postal-code","cc-name","cc-given-name","cc-additional-name","cc-family-name","cc-number","cc-exp","cc-exp-month","cc-exp-year","cc-csc","cc-type","transaction-currency","transaction-amount","language","bday","bday-day","bday-month","bday-year","sex","url","photo","one-time-code"],qualifiers:["home","work","mobile","fax","pager"],qualifiedTerms:["tel","tel-country-code","tel-national","tel-area-code","tel-local","tel-local-prefix","tel-local-suffix","tel-extension","email","impp"],locations:["billing","shipping"]},lp=function(e){var t=void 0!==(t=(l=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{}).looseTyped)&&t,n=void 0===(n=l.stateTerms)?[]:n,r=void 0===(r=l.locations)?[]:r,a=void 0===(a=l.qualifiers)?[]:a,o=void 0===(o=l.standaloneTerms)?[]:o,i=void 0===(i=l.qu\
+grep: write error: Broken pipe
+

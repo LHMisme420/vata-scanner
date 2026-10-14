@@ -1,0 +1,25 @@
+[*] Testing OBVIOUS zero-auth endpoints on big fish
+
+[*] https://api.openai.com
+
+[*] https://api.anthropic.com
+
+[*] https://api.claude.ai
+
+[*] https://api.mistral.ai
+
+[*] https://api.perplexity.ai
+[!] ZERO-AUTH: /health (HTTP 200)
+
+[*] https://api.together.ai
+[!] ZERO-AUTH: / (HTTP 200)
+
+[*] https://api.replicate.com
+[!] ZERO-AUTH: / (HTTP 200)
+[!] ZERO-AUTH: /openapi.json (HTTP 200)
+
+[*] https://api.huggingface.co
+
+[*] https://api.cohere.com
+
+[*] https://api.aleph-alpha.com

@@ -1,0 +1,68 @@
+{
+  "id": "DSC-031",
+  "title": "Composio cli-local-tools: permission-gate (gateToolExecution) structurally unreachable for local toolkit execution path",
+  "target": {
+    "repo": "https://github.com/ComposioHQ/composio",
+    "commit": "1aa6a22d8aca6e262b88cc2aedda0a025e03c0fe",
+    "commit_date": "2026-07-13T16:26:43-07:00",
+    "component": "ts/packages/cli/src/services/tools-executor.ts, ts/packages/cli/src/services/tool-permissions.ts, ts/packages/cli-local-tools"
+  },
+  "summary": "Composio's CLI implements a real human-in-the-loop approval control, gateToolExecution() (native macOS sidecar UI or browser fallback prompt, 'Allow once / Allow for 1hr / Deny'), gated behind an org-level 'enhanced controls' flag, intended to intercept risky tool calls before execution. In ToolsExecutorLive.execute() (tools-executor.ts), local-toolkit resolution is checked first: if localToolResolution matches, executeLocalToolBySlug() runs and the function returns immediately on success. gateToolExecution() is called only in the code path below this branch (the cloud/tool-router path) and is therefore structurally unreachable when a local tool resolves. The only gate on local-tool execution is a one-time global experimental feature flag (LOCAL_TOOLS), not a per-call, per-tool, or per-risk-tier check.",
+  "affected_toolkits": [
+    {
+      "slug": "BEEPER_IMESSAGE",
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "tool_count": 25,
+      "notable_tools": [
+        "SEND_MESSAGE",
+        "DELETE_THREAD",
+        "REPLY_TO_MESSAGE",
+        "EDIT_MESSAGE",
+        "SEND_FILE"
+      ]
+    },
+    {
+      "slug": "PEEKABOO",
+      "platforms": [
+        "darwin-arm64"
+      ],
+      "tool_count": 42,
+      "notable_tools": [
+        "CLICK",
+        "TYPE",
+        "DRAG",
+        "HOTKEY",
+        "APP_LAUNCH",
+        "CLIPBOARD"
+      ]
+    },
+    {
+      "slug": "CHROME_DEVTOOLS",
+      "platforms": [
+        "darwin-arm64",
+        "linux-arm64",
+        "linux-x64",
+        "win32-arm64",
+        "win32-x64"
+      ],
+      "tool_count": 35,
+      "notable_tools": [
+        "EVALUATE_SCRIPT",
+        "NAVIGATE_PAGE"
+      ]
+    }
+  ],
+  "compounding_factor": "Read-side tools in the same toolkits (LIST_MESSAGES, SEARCH_MESSAGES, SEE, IMAGE) return externally-sourced content (inbound message text, on-screen UI/accessibility text) directly into agent context with no provenance/trust marking, and no tags (destructiveHint/readOnlyHint/idempotentHint/openWorldHint -- the exact MCP-standard tag vocabulary Composio's own tool_router.py defines for this purpose) are ever set on any of the 102 declared local tools. This creates an indirect-prompt-injection-to-autonomous-action path with no built-in confirmation step of any kind.",
+  "evidence": [
+    "tools-executor.ts ToolsExecutorLive.execute(): local-tool branch (executeLocalToolBySlug + early return) precedes gateToolExecution() call, which exists only in the subsequent cloud/tool-router branch.",
+    "tool-permissions.ts gateToolExecution(): confirmed real control -- native sidecar or http://127.0.0.1 browser approval page with Allow once/Allow for 1hr/Deny, 30s timeout defaults to deny.",
+    "registry.ts executeLocalToolBySlug(slug, args) signature carries no orgId/projectId/consumerUserId/connectedAccountId/apiKey/permission-snapshot parameter -- incompatible with GateParams by construction.",
+    "Live harness (dynamic): resolveLocalTool() + executeLocalToolBySlug('CHROME_DEVTOOLS_STATUS_DAEMON', {}) executed a real subprocess end-to-end with zero Composio account, zero API key, zero network call to composio.dev.",
+    "Static declaration scan across all 3 toolkits / 102 tools: zero occurrences of tags, destructiveHint, readOnlyHint, gate, or approval-related fields (excluding unrelated OS-permission tools: PEEKABOO_PERMISSIONS_*, BEEPER_IMESSAGE_AUTHORIZE, which concern macOS Accessibility/Contacts/Messages-Data OS grants, not Composio's own approval gate)."
+  ],
+  "severity_rationale": "Destructive/mutating local actions (delete real message threads, send messages, arbitrary desktop click/type/drag) execute without the approval mechanism the product ships for exactly this purpose, regardless of whether the user's org has enhanced controls enabled -- the local path bypasses the check unconditionally, not merely by default-permissive policy.",
+  "disclosure_status": "pending -- reporting to security@composio.dev / GHSA after this anchor",
+  "methodology": "VATA / Receipts Over Promises"
+}

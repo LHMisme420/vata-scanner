@@ -1,0 +1,54 @@
+[*] TIER 2 TARGETS - AUTH BYPASS PATTERNS
+
+[*] https://api.anthropic.com
+
+[*] https://api.cerebras.ai
+
+[*] https://api.ai21.com
+
+[*] https://api.aleph-alpha.com
+
+[*] https://api.baseten.co
+
+[*] https://api.vllm.ai
+
+[*] https://api.anyscale.com
+
+[*] https://api.worker.dev
+
+[*] https://api.vercel.com
+
+[*] https://api.supabase.co
+
+[*] https://api.firebase.google.com
+
+[*] https://api.dynamodb.amazonaws.com
+
+[*] https://api.fauna.com
+
+[*] https://api.planetscale.com
+[*] GET : HTTP 200
+[DATA] <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PlanetScale API</title>
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="og2P9G6DWdTgyTmpgZKZBxB8W3MTJOPOjeWiAJz5p1eNWDYxbO-t18d9SB0hiGhEN9ZTzwtLoEEszdxBNbXRAg" />
+    <meta name="csp-nonce" content="sAhubA3g5LuOt4sQdK6TT2IARMbCqG2D1uFMnEvylEM=" />
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon-ac0afb6d.ico" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon-8a260325.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon-64a7048a.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preload" href="/fonts/InterVar.var.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/assets/application-74423f09.css" media="all" />
+      <script src="/assets/application-71bac642.js" defer="defer"></script>
+      <meta name="robots" content="noindex">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@planetscale">
+  <meta name="twitter:creator" content="@planetscale">
+
+[*] https://api.render.com
+[*] GET : HTTP 200
+[DATA] 👍

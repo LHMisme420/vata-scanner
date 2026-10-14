@@ -1,0 +1,5 @@
+wc -l ~/vata/dsc-036/dsc036_writeup.md
+head -5 ~/vata/dsc-036/dsc036_writeup.md
+wc -l ~/vata/dsc-036/dsc036_writeup.md
+head -5 ~/vata/dsc-036/dsc036_writeup.md
+paste the full description text you submitted to GitHub here]

@@ -1,0 +1,15 @@
+https://api.anthropic.com
+https://api.cerebras.ai
+https://api.ai21.com
+https://api.aleph-alpha.com
+https://api.baseten.co
+https://api.vllm.ai
+https://api.anyscale.com
+https://api.worker.dev
+https://api.vercel.com
+https://api.supabase.co
+https://api.firebase.google.com
+https://api.dynamodb.amazonaws.com
+https://api.fauna.com
+https://api.planetscale.com
+https://api.render.com

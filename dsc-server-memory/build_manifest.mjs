@@ -1,0 +1,22 @@
+import crypto from 'crypto';
+import fs from 'fs';
+
+const finding = {
+  target: "@modelcontextprotocol/server-memory",
+  maintainer: "Anthropic (MCP reference implementation)",
+  version_tested: "0.6.3",
+  vulnerability_class: "CWE-22: Improper Limitation of a Pathname to a Restricted Directory (Path Traversal)",
+  component: "ensureMemoryFilePath() in src/memory/index.ts",
+  root_cause: "MEMORY_FILE_PATH env var, when relative, is resolved via path.join(installDir, envVar) with no normalization or containment check. path.join does not strip '../' traversal sequences.",
+  impact: "Arbitrary file read/write on host filesystem via MCP tool calls (create_entities, read_graph, search_nodes, etc.), limited only by host process OS permissions. Confirmed live escape to /etc/passwd and ~/.ssh/authorized_keys path resolution, and live-repro write to /tmp/ via real create_entities tool call over actual MCP stdio transport.",
+  repro_method: "Live process spawn of installed package (node dist/index.js) with malicious relative MEMORY_FILE_PATH, real MCP initialize handshake, real create_entities tool call via JSON-RPC over stdio. Verified resulting file landed outside intended install directory.",
+  prior_art: "GitHub issue modelcontextprotocol/servers#4117 (May 2026) independently flagged related destructive-operation and hardening concerns (unguarded delete_entities/delete_observations/delete_relations, no confirmation gate) but did not identify or live-repro this specific MEMORY_FILE_PATH path traversal primitive.",
+  related_secondary_finding: "delete_entities, delete_observations, delete_relations execute immediately with zero confirmation gate despite destructiveHint:true in tool schema annotations (schema is descriptive only, not enforced). Consistent with #4117.",
+  timestamp: new Date().toISOString(),
+};
+
+fs.writeFileSync('dsc_server_memory_finding.json', JSON.stringify(finding, null, 2));
+const hash = crypto.createHash('sha256').update(JSON.stringify(finding, Object.keys(finding).sort())).digest('hex');
+console.log(JSON.stringify(finding, null, 2));
+console.log(`\nManifest SHA-256: ${hash}`);
+console.log(`Length: ${hash.length}`);

@@ -1,0 +1,32 @@
+[*] Hunting real API endpoints for zero-auth access
+[*] https://api.groq.com
+[*] https://api.cohere.com
+[*] https://api.baseten.co
+[*] https://api.anyscale.com
+[*] https://api.together.ai
+[*] https://api.runpod.io
+[*] https://api.modal.com
+[+] ZERO-AUTH: https://api.modal.com/api (HTTP 200)
+
+[+] ZERO-AUTH: https://api.modal.com/v1 (HTTP 200)
+
+[+] ZERO-AUTH: https://api.modal.com/v2 (HTTP 200)
+
+[+] ZERO-AUTH: https://api.modal.com/models (HTTP 200)
+
+[+] ZERO-AUTH: https://api.modal.com/predictions (HTTP 200)
+
+[+] ZERO-AUTH: https://api.modal.com/inference (HTTP 200)
+
+[+] ZERO-AUTH: https://api.modal.com/completions (HTTP 200)
+
+[*] https://api.huggingface.co
+[*] https://api.replicate.com
+[*] https://api.vllm.io
+[*] https://api.aleph-alpha.com
+[*] https://api.cerebras.ai
+[*] https://api.ai21.com
+[*] https://api.cloudflare.com/api
+[*] https://api.aws.amazon.com
+
+[*] Results in real-findings.txt

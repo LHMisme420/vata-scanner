@@ -1,0 +1,1 @@
+{"id":6,"jsonrpc":"2.0","result":{"contents":[{"mimeType":"text/plain","text":"ACME Corp customer export\[REDACTED:email],[REDACTED:credit_card]\[REDACTED:email],[REDACTED:credit_card]","uri":"file:///vault/customer-pii.txt"}]}}

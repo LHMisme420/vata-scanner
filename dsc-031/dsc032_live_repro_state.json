@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-07-14T12:35:42.614742+00:00",
+  "marker": "DSC032_INTERNAL_SERVICE_REACHED_7f3a9c1e",
+  "tests": [
+    {
+      "name": "literal_ip_blocked",
+      "expected": "blocked",
+      "blocked": true
+    },
+    {
+      "name": "dns_rebind_domain_reaches_blocked_ip",
+      "navigated": true,
+      "marker_found_in_page": true
+    }
+  ]
+}

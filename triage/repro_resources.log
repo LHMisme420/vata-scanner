@@ -1,0 +1,31 @@
+===== PROOF 4: scoped enumerates resources =====
+resources/list -> HTTP 200 -> ALLOWED
+
+===== PROOF 5a: scoped reads SECRETS (redactor misses -> raw egress) =====
+resources/read secrets -> HTTP 200 -> ALLOWED
+  >> RAW AWS KEY PRESENT in response
+
+===== PROOF 5b: scoped reads PII (redactor catches; also corrupts JSON) =====
+resources/read pii -> HTTP 200 -> ALLOWED
+  >> INVALID JSON (redactor corrupted escape — finding #2)
+
+===== PROOF 5c: scoped reads PII via SSE (content-type bypasses redaction) =====
+resources/read sse -> HTTP 200
+  >> RAW PII 'jane.doe@example.com' PRESENT — redaction BYPASSED via text/event-stream
+  --- 05c body ---
+data: {"jsonrpc":"2.0","id":7,"result":{"contents":[{"uri":"file:///vault/stream-pii.txt","mimeType":"text/plain","text":"jane.doe@example.com 4111-1111-1111-1111"}]}}
+
+
+===== VERDICT =====
+authz gap: secrets=ALLOWED pii=ALLOWED | sse egress + json-corruption = supporting findings
+total 32
+drwxr-xr-x 1 lhmisme lhmisme 538 Sep 30 16:39 .
+drwxr-xr-x 1 lhmisme lhmisme  38 Sep 29 08:23 ..
+-rw-r--r-- 1 lhmisme lhmisme 618 Sep 29 08:26 01_scoped_toolslist_LEAK.json
+-rw-r--r-- 1 lhmisme lhmisme  92 Sep 29 08:26 02_scoped_call_delete_all_DENIED.json
+-rw-r--r-- 1 lhmisme lhmisme  92 Sep 29 08:26 03_full_call_delete_all_ALLOWED.json
+-rw-r--r-- 1 lhmisme lhmisme 455 Sep 30 16:39 04_scoped_resourceslist_LEAK.json
+-rw-r--r-- 1 lhmisme lhmisme 264 Sep 30 16:39 05a_scoped_read_secrets_LEAK.json
+-rw-r--r-- 1 lhmisme lhmisme 408 Sep 30 16:05 05b_INVALID_JSON_evidence.hex
+-rw-r--r-- 1 lhmisme lhmisme 229 Sep 30 16:39 05b_scoped_read_pii_REDACTOR_BROKE_JSON.json
+-rw-r--r-- 1 lhmisme lhmisme 169 Sep 30 16:39 05c_scoped_read_sse_LEAK.txt

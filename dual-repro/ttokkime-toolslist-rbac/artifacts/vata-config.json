@@ -1,0 +1,25 @@
+{
+  "listen": ":8080",
+  "upstreams": {
+    "corpus": {
+      "url": "http://127.0.0.1:9000/mcp",
+      "timeout_ms": 5000,
+      "breaker": { "failure_threshold": 5, "open_ms": 2000 }
+    }
+  },
+  "tenants": {
+    "tok_full": {
+      "name": "full-access",
+      "upstream": "corpus",
+      "allowed_tools": ["*"],
+      "rate_limit": { "rps": 50, "burst": 50 }
+    },
+    "tok_scoped": {
+      "name": "scoped-search-only",
+      "upstream": "corpus",
+      "allowed_tools": ["search"],
+      "rate_limit": { "rps": 50, "burst": 50 }
+    }
+  },
+  "redaction": { "enabled": true, "patterns": [] }
+}

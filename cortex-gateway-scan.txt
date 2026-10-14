@@ -1,0 +1,72 @@
+skipped 11 test/fixture path(s); pass --include-tests to scan them
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/scripts/stdio-bridge.mjs:162  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: MCP_URL
+  161: 
+  162:     const res = await fetch(MCP_URL, { method: 'POST', headers, body: JSON.stringify(message) });
+  163: 
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/adapter/mcp-client.ts:87  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  86:   try {
+  87:     res = await fetch(url, {
+  88:       method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/adapter/oauth-discovery.ts:35  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  34:   try {
+  35:     const res = await fetch(url, { headers: { Accept: 'application/json' } });
+  36:     if (!res.ok) return null;
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/adapter/oauth-discovery.ts:155  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: auth.registrationEndpoint
+  154: 
+  155:   const res = await fetch(auth.registrationEndpoint, {
+  156:     method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/adapter/oauth-discovery.ts:219  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: client.tokenEndpoint
+  218:   }
+  219:   const res = await fetch(client.tokenEndpoint, { method: 'POST', headers, body: body.toString() });
+  220:   const json = (await res.json().catch(() => null)) as
+
+[MEDIUM/LOW] A6  Authz check gated on a specific method/path - verify other methods are not bypassed (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/app/api/mcp-adapter/[server]/backend/route.ts:111  (VATA:ttokkime method-scoped RBAC (tools/list bypass))
+  if (method === 'list_prompts') return json(200, { prompts: [] });
+  110:   }
+  111:   if (method === 'list_prompts') return json(200, { prompts: [] });
+  112:   if (method === 'list_resource_templates') return json(200, { resourceTemplates: [] });
+
+[MEDIUM/LOW] A6  Authz check gated on a specific method/path - verify other methods are not bypassed (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/app/api/mcp-adapter/[server]/backend/route.ts:112  (VATA:ttokkime method-scoped RBAC (tools/list bypass))
+  if (method === 'list_resource_templates') return json(200, { resourceT
+  111:   if (method === 'list_prompts') return json(200, { prompts: [] });
+  112:   if (method === 'list_resource_templates') return json(200, { resourceTemplates: [] });
+  113:   if (method === 'list_tools') {
+
+[MEDIUM/LOW] A6  Authz check gated on a specific method/path - verify other methods are not bypassed (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/app/api/mcp-adapter/[server]/backend/route.ts:113  (VATA:ttokkime method-scoped RBAC (tools/list bypass))
+  if (method === 'list_tools') {
+  112:   if (method === 'list_resource_templates') return json(200, { resourceTemplates: [] });
+  113:   if (method === 'list_tools') {
+  114:     try {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/contract/client.ts:151  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  150:   try {
+  151:     res = await fetch(url, {
+  152:       method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/wellknownmcp-cortex-gateway/src/lib/notify.ts:69  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  68:     try {
+  69:       res = await fetch(url, {
+  70:         method: 'POST',
+
+10 finding(s).

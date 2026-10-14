@@ -1,0 +1,30 @@
+skipped 6 test/fixture path(s); pass --include-tests to scan them
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/docker-mcp-gateway-oauth-helpers/dcr.go:188  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: discovery.RegistrationEndpoint
+  187: 	// Create HTTP request
+  188: 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, discovery.RegistrationEndpoint, bytes.NewReader(body))
+  189: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/docker-mcp-gateway-oauth-helpers/discovery.go:261  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: metadataURL
+  260: func fetchOAuthProtectedResourceMetadata(ctx context.Context, client *http.Client, metadataURL string) (*ProtectedResourceMetadata, error) {
+  261: 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, metadataURL, nil)
+  262: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/docker-mcp-gateway-oauth-helpers/discovery.go:367  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: metadataURL
+  366: 
+  367: 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, metadataURL, nil)
+  368: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/docker-mcp-gateway-oauth-helpers/registration.go:102  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: reg.RegistrationClientURI
+  101: 	}
+  102: 	req, err := http.NewRequestWithContext(ctx, method, reg.RegistrationClientURI, reader)
+  103: 	if err != nil {
+
+4 finding(s).

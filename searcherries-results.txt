@@ -1,0 +1,2 @@
+[0;34m[*][0m Scanning: https://app.searcherries.com/mcp/searcherries
+[0;34m[*][0m Done. Results in zero-auth-findings.txt

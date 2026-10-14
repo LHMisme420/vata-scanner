@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/lhmisme/vata/mcp-authscan/mcp_authscan.py", line 1118, in <module>
+    main()
+    ~~~~^^
+  File "/home/lhmisme/vata/mcp-authscan/mcp_authscan.py", line 1089, in main
+    F = scan(args.target, args.include_tests, args.exclude)
+  File "/home/lhmisme/vata/mcp-authscan/mcp_authscan.py", line 1070, in scan
+    for m in A7_SCOPED_CALL.finditer(text):
+             ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyboardInterrupt

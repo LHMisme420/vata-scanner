@@ -1,0 +1,22 @@
+import crypto from 'crypto';
+import fs from 'fs';
+
+const finding = {
+  target: "Agent-Field/agentfield (sdk/go)",
+  maintainer: "Agent-Field (open source, Apache-2.0)",
+  vulnerability_class: "CWE-863: Incorrect Authorization (related: CWE-1188 Insecure Default Initialization of Resource)",
+  component: "LocalVerifier.CheckRegistration() in sdk/go/agent/verification.go, invoked from DID-auth middleware in sdk/go/agent/agent.go (~line 963-967)",
+  root_cause: "CheckRegistration() explicitly fail-opens when the registeredDIDs cache is empty: 'Cache not populated yet — allow.' The cache starts empty at LocalVerifier construction and is only populated by a successful Refresh(). Refresh() performs an all-or-nothing fetch of policies, revocations, registered DIDs, and admin public key from the control plane; if ANY of these fetches fails, the function returns an error without updating any cached state (including lastRefresh), and the caller (agent.go DID-auth middleware) only logs the error via a warning -- it does not block the request or fail closed. NeedsRefresh() continues to return true after a failed refresh, so refresh is retried on each subsequent request, but the empty-cache fail-open persists for the entire duration the control plane remains unreachable.",
+  impact: "Any agent node that experiences a control-plane-unreachable condition after its cache has never successfully populated -- including at startup (a routine race in containerized/Kubernetes deployments where agent-before-control-plane startup ordering is common and explicitly supported by this project) or during any subsequent control-plane outage or network partition before the first successful refresh -- will accept requests bearing an arbitrary, unregistered, never-seen caller DID as valid for DID registration purposes, for the entire duration of the outage. This is distinct from and compounds DSC-040 (authorization subsystem off by default): even in deployments where authorization IS enabled, this fail-open condition provides a bypass window during any control-plane connectivity gap.",
+  repro_method: "Live execution of the actual shipped SDK code (github.com/Agent-Field/agentfield/sdk/go/agent, imported directly via Go module replace directive against a local clone, no reimplementation). Constructed a real LocalVerifier pointed at an unreachable address (http://127.0.0.1:1). Confirmed CheckRegistration() returns true for a fabricated, never-registered DID both before and after a failed Refresh() call against the unreachable endpoint, demonstrating the fail-open condition is standing, not a narrow startup race.",
+  code_quality_note: "Refresh()'s all-or-nothing atomic update pattern is defensible in isolation -- it avoids partially corrupting the cache with a mix of stale and fresh data. The vulnerability arises specifically from combining that pattern with CheckRegistration's deliberate empty-cache fail-open, and with the calling middleware treating a Refresh() failure as log-only rather than blocking. Each piece is individually reasonable; the composition is not.",
+  recommended_remediation: "Distinguish 'cache never populated' from 'cache populated but currently stale'. Fail closed (reject unregistered-looking or unverifiable DIDs) when the cache has never successfully populated, rather than fail-open. Alternatively, block/reject requests at the DID-auth middleware layer when Refresh() fails and no prior successful cache exists, rather than only logging a warning and proceeding.",
+  related_finding: "Compounds DSC-040 (Authorization.Enabled defaults to false) -- in deployments where authorization is enabled specifically to get the security properties this project markets, this fail-open condition still provides a bypass during any control-plane connectivity gap.",
+  timestamp: new Date().toISOString(),
+};
+
+fs.writeFileSync('dsc_agentfield_registration_failopen_finding.json', JSON.stringify(finding, null, 2));
+const hash = crypto.createHash('sha256').update(JSON.stringify(finding, Object.keys(finding).sort())).digest('hex');
+console.log(JSON.stringify(finding, null, 2));
+console.log(`\nManifest SHA-256: ${hash}`);
+console.log(`Length: ${hash.length}`);

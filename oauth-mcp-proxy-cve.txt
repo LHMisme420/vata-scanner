@@ -1,0 +1,54 @@
+# OAuth-MCP-Proxy: Localhost Redirect URI Bypass
+
+## Vulnerability Summary
+The oauth-mcp-proxy allows ANY localhost redirect URI without validation, enabling attackers to redirect OAuth authorization codes and tokens to unintended localhost services.
+
+## Location
+File: handlers.go
+Function: isAllowedClientRedirectURI (line 933-971)
+Vulnerable Code (line 935-937):
+```go
+if isLocalhostURI(uri) {
+    return true
+}
+```
+
+## Impact
+- Authorization code interception
+- OAuth token theft
+- Cross-service token redirection
+- Account compromise
+
+## CVSS Score
+7.1 (High) - AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N
+
+## Proof of Concept
+1. Attacker controls a localhost service (or exploits localhost binding)
+2. Attacker crafts authorization request with redirect_uri=http://localhost:9999/callback
+3. Any localhost URI is accepted by isAllowedClientRedirectURI
+4. When user completes OAuth flow, token redirects to attacker's localhost service
+5. Attacker captures authorization code
+6. Attacker exchanges code for access token
+7. Attacker gains access to user's resources
+
+## Recommended Fix
+Validate localhost URIs against configured allowlist, don't blindly accept all localhost URIs:
+
+```go
+// Fixed version
+func (h *OAuth2Handler) isAllowedClientRedirectURI(uri string) bool {
+    // For localhost, still require explicit configuration
+    parsedURI, err := url.Parse(uri)
+    if err != nil {
+        return false
+    }
+    
+    // Check if explicitly configured (even for localhost)
+    if h.config.RedirectURIs != "" {
+        return h.isValidRedirectURI(uri)
+    }
+    
+    return false
+}
+```
+

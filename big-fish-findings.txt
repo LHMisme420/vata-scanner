@@ -1,0 +1,7 @@
+=== BIG FISH FINDINGS ===
+1. Slack MCP - /api/mcp (HTTP 200)
+2. Slack Resources - /resources (HTTP 200)
+3. GitHub API (HTTP 200)
+4. Together AI (HTTP 200)
+5. Replicate (HTTP 200)
+6. Modal (HTTP 200)

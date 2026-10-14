@@ -1,0 +1,3 @@
+skipped 35 test/fixture path(s); pass --include-tests to scan them
+No findings. (Absence of finding is not proof of safety.)
+0 finding(s).

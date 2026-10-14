@@ -1,0 +1,56 @@
+diff --git a/internal/config/config.go b/internal/config/config.go
+index bed86f5..8aff4d8 100644
+--- a/internal/config/config.go
++++ b/internal/config/config.go
+@@ -139,3 +139,14 @@ func (t Tenant) ToolAllowed(tool string) bool {
+ 	}
+ 	return false
+ }
++
++// IsWildcard reports whether the tenant's allowlist contains "*", i.e. a
++// full-access tenant that retains pass-through for every method.
++func (t Tenant) IsWildcard() bool {
++	for _, a := range t.AllowedTools {
++		if a == "*" {
++			return true
++		}
++	}
++	return false
++}
+diff --git a/internal/proxy/proxy.go b/internal/proxy/proxy.go
+index e4469e9..37395d9 100644
+--- a/internal/proxy/proxy.go
++++ b/internal/proxy/proxy.go
+@@ -141,7 +141,12 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+ 	entry.Method = req.Method
+ 
+ 	var reqID json.RawMessage = req.ID
+-	if req.Method == mcp.MethodToolsCall {
++	// Default-deny by method. The upstream MCP server exposes tools, resources,
++	// and prompts; a scoped tenant must not reach any method beyond the ones
++	// explicitly permitted here. Unknown/future methods fail closed (fixes the
++	// prior "everything else is passed through" gap for non-wildcard tenants).
++	switch req.Method {
++	case mcp.MethodToolsCall:
+ 		var p mcp.ToolCallParams
+ 		_ = json.Unmarshal(req.Params, &p)
+ 		entry.Tool = p.Name
+@@ -151,6 +156,18 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+ 				"tool not permitted: "+p.Name, reqID)
+ 			return
+ 		}
++	case mcp.MethodToolsList, mcp.MethodInitialize:
++		// Allowed for all tenants. NOTE: tools/list still returns the full
++		// upstream catalog; response-side filtering to the allowlist is phase 2.
++	default:
++		// resources/*, prompts/*, and any other method: fail closed for scoped
++		// tenants; wildcard tenants retain full pass-through.
++		if !tenant.IsWildcard() {
++			entry.Decision = audit.DeniedRBAC
++			g.finish(w, r, entry, start, http.StatusForbidden, mcp.CodeUnauthorized,
++				"method not permitted for scoped tenant: "+req.Method, reqID)
++			return
++		}
+ 	}
+ 
+ 	// 4. Resolve upstream + circuit breaker.

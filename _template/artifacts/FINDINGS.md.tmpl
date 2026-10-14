@@ -1,0 +1,21 @@
+# VATA — __TARGET__: __SHORT_TITLE__
+Target: __REPO_URL__
+Vulnerable baseline: __COMMIT__ (unmodified)
+Researcher: Leroy / VATA — Receipts Over Promises
+
+## Provenance (layers)
+1. Vulnerable target — pinned at __COMMIT__, no edits to target logic.
+2. Test harness — working_tree.patch (fixtures only, lists files touched).
+3. Proposed fix — fix.patch (if authored).
+
+## Finding N — <title> (<PRIMARY/SECONDARY>)
+Claim: <one sentence, black-box observable>.
+Root cause: <file:line> — <mechanism, quote the damning comment if any>.
+Receipts: <file>  <what it shows>
+Controls: <file>  <proves the gate is narrow, not broken>
+Fix status: <FIXED/NOT fixed/PHASE 2> — <what the patch does and doesn't cover>.
+Proposed CVSS (vector for review, score finalized in calculator): <vector> — <band>.
+
+## Reproduce
+  ./repro.sh                 # vulnerable-state receipts
+  # apply fix.patch, rebuild, then re-run to see the flip

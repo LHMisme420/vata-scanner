@@ -1,0 +1,5 @@
+https://api.example1.com
+https://api.example2.com
+https://api.example3.com
+https://mcp.example4.ai
+https://api.example5.dev

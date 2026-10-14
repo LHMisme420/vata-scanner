@@ -1,0 +1,1456 @@
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client.py:16  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  15:         setup_mock_web_api_server(self)
+  16:         self.client = slack.RTMClient(token="xoxp-1234", base_url="http://localhost:8888", auto_reconnect=False)
+  17: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client.py:86  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  85:         with self.assertRaises(e.SlackApiError) as context:
+  86:             slack.RTMClient(token="xoxp-1234", auto_reconnect=False).start()
+  87: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:28  (VATA:lucky-aeon default admin creds)
+  token="xoxb-valid"
+  27:         self.client = slack.RTMClient(
+  28:             token="xoxb-valid",
+  29:             base_url="http://localhost:8765",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:34  (VATA:lucky-aeon default admin creds)
+  token="xoxb-valid"
+  33:         self.client._web_client = slack.WebClient(
+  34:             token="xoxb-valid",
+  35:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:150  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-rtm.start"
+  149: 
+  150:         self.client.token = "xoxb-rtm.start"
+  151:         self.client.connect_method = "rtm.start"
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:253  (VATA:lucky-aeon default admin creds)
+  token="xoxb-valid"
+  252:         client = slack.RTMClient(
+  253:             token="xoxb-valid",
+  254:             base_url="http://localhost:8765",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:258  (VATA:lucky-aeon default admin creds)
+  token="xoxb-valid"
+  257:         client._web_client = slack.WebClient(
+  258:             token="xoxb-valid",
+  259:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:275  (VATA:lucky-aeon default admin creds)
+  token="xoxb-valid"
+  274:         client = slack.RTMClient(
+  275:             token="xoxb-valid",
+  276:             base_url="http://localhost:8765",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_functional.py:280  (VATA:lucky-aeon default admin creds)
+  token="xoxb-valid"
+  279:         client._web_client = slack.WebClient(
+  280:             token="xoxb-valid",
+  281:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_v2.py:15  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  14:         self.rtm = RTMClient(
+  15:             token="xoxp-1234",
+  16:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/rtm/test_rtm_client_v2.py:93  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  92:         with self.assertRaises(e.SlackApiError) as context:
+  93:             RTMClient(token="xoxp-1234", auto_reconnect_enabled=False).start()
+  94: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/signature/test_signature_verifier.py:19  (VATA:lucky-aeon default admin creds)
+  secret = "8f742231b10e8888abcd99yyyzzz85a5"
+  18:     # https://docs.slack.dev/authentication/verifying-requests-from-slack/
+  19:     signing_secret = "8f742231b10e8888abcd99yyyzzz85a5"
+  20: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/audit_logs/test_client_http_retry.py:20  (VATA:lucky-aeon default admin creds)
+  token="xoxp-remote_disconnected"
+  19:         client = AuditLogsClient(
+  20:             token="xoxp-remote_disconnected",
+  21:             base_url="http://localhost:8888/",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/audit_logs/test_client_http_retry.py:34  (VATA:lucky-aeon default admin creds)
+  token="xoxp-ratelimited"
+  33:         client = AuditLogsClient(
+  34:             token="xoxp-ratelimited",
+  35:             base_url="http://localhost:8888/",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:45  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  44:             bot_id="B111",
+  45:             bot_token="xoxb-111",
+  46:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:104  (VATA:lucky-aeon default admin creds)
+  token="xoxb-O111"
+  103:             bot_id="BO111",
+  104:             bot_token="xoxb-O111",
+  105:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:176  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  175:             bot_id="B111",
+  176:             bot_token="xoxe.xoxp-1-initial",
+  177:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:179  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  178:             bot_user_id="U222",
+  179:             bot_refresh_token="xoxe-1-initial",
+  180:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:195  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-refreshed"
+  194:             bot_id="B111",
+  195:             bot_token="xoxe.xoxp-1-refreshed",
+  196:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:198  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-refreshed"
+  197:             bot_user_id="U222",
+  198:             bot_refresh_token="xoxe-1-refreshed",
+  199:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:259  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  258:             bot_id="B111",
+  259:             bot_token="xoxb-111",
+  260:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_amazon_s3.py:286  (VATA:lucky-aeon default admin creds)
+  token="xoxp-111"
+  285:             bot_scopes=["openid"],
+  286:             user_token="xoxp-111",
+  287:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:41  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  40:             bot_id="B111",
+  41:             bot_token="xoxb-111",
+  42:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:102  (VATA:lucky-aeon default admin creds)
+  token="xoxb-O111"
+  101:             bot_id="BO111",
+  102:             bot_token="xoxb-O111",
+  103:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:178  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  177:             bot_id="B111",
+  178:             bot_token="xoxe.xoxp-1-initial",
+  179:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:181  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  180:             bot_user_id="U222",
+  181:             bot_refresh_token="xoxe-1-initial",
+  182:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:197  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-refreshed"
+  196:             bot_id="B111",
+  197:             bot_token="xoxe.xoxp-1-refreshed",
+  198:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:200  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-refreshed"
+  199:             bot_user_id="U222",
+  200:             bot_refresh_token="xoxe-1-refreshed",
+  201:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:262  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  261:             bot_id="B111",
+  262:             bot_token="xoxb-111",
+  263:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:289  (VATA:lucky-aeon default admin creds)
+  token="xoxp-111"
+  288:             bot_scopes=["openid"],
+  289:             user_token="xoxp-111",
+  290:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_async_sqlalchemy.py:316  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  315:             bot_id="B111",
+  316:             bot_token="xoxb-111",
+  317:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_file.py:25  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  24:             bot_id="B111",
+  25:             bot_token="xoxb-111",
+  26:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_file.py:88  (VATA:lucky-aeon default admin creds)
+  token="xoxb-O111"
+  87:             bot_id="BO111",
+  88:             bot_token="xoxb-O111",
+  89:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_file.py:161  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  160:             bot_id="B111",
+  161:             bot_token="xoxb-111",
+  162:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_file.py:188  (VATA:lucky-aeon default admin creds)
+  token="xoxp-111"
+  187:             bot_scopes=["openid"],
+  188:             user_token="xoxp-111",
+  189:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_models.py:63  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  62:             bot_id="B111",
+  63:             bot_token="xoxb-111",
+  64:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_models.py:83  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  82:             bot_id="B111",
+  83:             bot_token="xoxb-111",
+  84:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_models.py:113  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  112:             bot_id="B111",
+  113:             bot_token="xoxb-111",
+  114:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_simple_cache.py:23  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  22:             bot_id="B111",
+  23:             bot_token="xoxb-111",
+  24:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_simple_cache.py:65  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  64:             bot_id="B111",
+  65:             bot_token="xoxe.xoxp-1-initial",
+  66:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_simple_cache.py:68  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  67:             bot_user_id="U222",
+  68:             bot_refresh_token="xoxe-1-initial",
+  69:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_simple_cache.py:84  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-refreshed"
+  83:             bot_id="B111",
+  84:             bot_token="xoxe.xoxp-1-refreshed",
+  85:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_simple_cache.py:87  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-refreshed"
+  86:             bot_user_id="U222",
+  87:             bot_refresh_token="xoxe-1-refreshed",
+  88:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:37  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  36:             bot_id="B111",
+  37:             bot_token="xoxb-111",
+  38:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:97  (VATA:lucky-aeon default admin creds)
+  token="xoxb-O111"
+  96:             bot_id="BO111",
+  97:             bot_token="xoxb-O111",
+  98:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:172  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  171:             bot_id="B111",
+  172:             bot_token="xoxe.xoxp-1-initial",
+  173:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:175  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  174:             bot_user_id="U222",
+  175:             bot_refresh_token="xoxe-1-initial",
+  176:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:191  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-refreshed"
+  190:             bot_id="B111",
+  191:             bot_token="xoxe.xoxp-1-refreshed",
+  192:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:194  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-refreshed"
+  193:             bot_user_id="U222",
+  194:             bot_refresh_token="xoxe-1-refreshed",
+  195:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:255  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  254:             bot_id="B111",
+  255:             bot_token="xoxb-111",
+  256:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:282  (VATA:lucky-aeon default admin creds)
+  token="xoxp-111"
+  281:             bot_scopes=["openid"],
+  282:             user_token="xoxp-111",
+  283:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlalchemy.py:308  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  307:             bot_id="B111",
+  308:             bot_token="xoxb-111",
+  309:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:33  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  32:             bot_id="B111",
+  33:             bot_token="xoxb-111",
+  34:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:92  (VATA:lucky-aeon default admin creds)
+  token="xoxb-O111"
+  91:             bot_id="BO111",
+  92:             bot_token="xoxb-O111",
+  93:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:165  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  164:             bot_id="B111",
+  165:             bot_token="xoxe.xoxp-1-initial",
+  166:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:168  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  167:             bot_user_id="U222",
+  168:             bot_refresh_token="xoxe-1-initial",
+  169:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:184  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-refreshed"
+  183:             bot_id="B111",
+  184:             bot_token="xoxe.xoxp-1-refreshed",
+  185:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:187  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-refreshed"
+  186:             bot_user_id="U222",
+  187:             bot_refresh_token="xoxe-1-refreshed",
+  188:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:248  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  247:             bot_id="B111",
+  248:             bot_token="xoxb-111",
+  249:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/installation_store/test_sqlite3.py:275  (VATA:lucky-aeon default admin creds)
+  token="xoxp-111"
+  274:             bot_scopes=["openid"],
+  275:             user_token="xoxp-111",
+  276:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/state_store/test_stateless.py:51  (VATA:lucky-aeon default admin creds)
+  secret="different-secret"
+  50:             expiration_seconds=10,
+  51:             signing_secret="different-secret",
+  52:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:30  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  29:             bot_id="B111",
+  30:             bot_token="xoxe.xoxp-1-initial",
+  31:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:33  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  32:             bot_user_id="U222",
+  33:             bot_refresh_token="xoxe-1-initial",
+  34:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:53  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  52:             bot_id="B111",
+  53:             bot_token="xoxe.xoxp-1-initial",
+  54:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:56  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  55:             bot_user_id="U222",
+  56:             bot_refresh_token="xoxe-1-initial",
+  57:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:78  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  77:             bot_id="B111",
+  78:             bot_token="xoxe.xoxp-1-initial",
+  79:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:105  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  104:             bot_id="B111",
+  105:             bot_token="xoxe.xoxp-1-initial",
+  106:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/oauth/token_rotation/test_token_rotator.py:108  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  107:             bot_user_id="U222",
+  108:             bot_refresh_token="xoxe-1-initial",
+  109:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/rtm_v2/test_rtm_v2.py:15  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  14:         self.rtm = RTMClient(
+  15:             token="xoxp-1234",
+  16:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/rtm_v2/test_rtm_v2.py:93  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  92:         with self.assertRaises(e.SlackApiError) as context:
+  93:             RTMClient(token="xoxp-1234", auto_reconnect_enabled=False).start()
+  94: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/scim/test_client.py:19  (VATA:lucky-aeon default admin creds)
+  token="xoxp-valid"
+  18:     def test_users(self):
+  19:         client = SCIMClient(base_url="http://localhost:8888/", token="xoxp-valid")
+  20:         client.search_users(start_index=0, count=1)
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/scim/test_client.py:48  (VATA:lucky-aeon default admin creds)
+  token="xoxp-valid"
+  47:     def test_groups(self):
+  48:         client = SCIMClient(base_url="http://localhost:8888/", token="xoxp-valid")
+  49:         client.search_groups(start_index=0, count=1)
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/scim/test_client_http_retry.py:21  (VATA:lucky-aeon default admin creds)
+  token="xoxp-remote_disconnected"
+  20:             base_url="http://localhost:8888/",
+  21:             token="xoxp-remote_disconnected",
+  22:             retry_handlers=[retry_handler],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/scim/test_client_http_retry.py:36  (VATA:lucky-aeon default admin creds)
+  token="xoxp-ratelimited"
+  35:             base_url="http://localhost:8888/",
+  36:             token="xoxp-ratelimited",
+  37:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/signature/test_signature_verifier.py:19  (VATA:lucky-aeon default admin creds)
+  secret = "8f742231b10e8888abcd99yyyzzz85a5"
+  18:     # https://docs.slack.dev/authentication/verifying-requests-from-slack/
+  19:     signing_secret = "8f742231b10e8888abcd99yyyzzz85a5"
+  20: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:43  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  42:         on_message_listeners = [lambda message: None]
+  43:         client = SocketModeClient(app_token="xapp-A111-222-xyz", on_message_listeners=on_message_listeners)
+  44:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:54  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  53:         logger = logging.getLogger(f"{__name__}.debug_guard.client")
+  54:         client = SocketModeClient(app_token="xapp-A111-222-xyz", logger=logger)
+  55:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:70  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  69:         client = SocketModeClient(
+  70:             app_token="xapp-A111-222-xyz",
+  71:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:77  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  76:         legacy_client = LegacyWebClient(token="xoxb-api_test", base_url="http://localhost:8888")
+  77:         response = legacy_client.apps_connections_open(app_token="xapp-A111-222-xyz")
+  78:         self.assertIsNotNone(response["url"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:82  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  81:         client = SocketModeClient(
+  82:             app_token="xapp-A111-222-xyz",
+  83:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:90  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  89:         client = SocketModeClient(
+  90:             app_token="xapp-A111-222-xyz",
+  91:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_builtin.py:105  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  104:         client = SocketModeClient(
+  105:             app_token="xapp-A111-222-xyz",
+  106:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_interactions_builtin.py:44  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  43:         try:
+  44:             SocketModeClient(app_token="xapp-A111-222-xyz", receive_buffer_size=1)
+  45:             self.fail("SlackClientConfigurationError is expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_interactions_builtin.py:79  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  78:                 client = SocketModeClient(
+  79:                     app_token="xapp-A111-222-xyz",
+  80:                     web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_interactions_builtin.py:128  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  127:             client = SocketModeClient(
+  128:                 app_token="xapp-A111-222-xyz",
+  129:                 web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_interactions_builtin.py:152  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  151:         client = SocketModeClient(
+  152:             app_token="xapp-A111-222-xyz",
+  153:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_interactions_websocket_client.py:54  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  53:         client = SocketModeClient(
+  54:             app_token="xapp-A111-222-xyz",
+  55:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_interactions_websocket_client.py:94  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  93:             client = SocketModeClient(
+  94:                 app_token="xapp-A111-222-xyz",
+  95:                 web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/socket_mode/test_websocket_client.py:14  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  13:     def test_init_close(self):
+  14:         client = SocketModeClient(app_token="xapp-A111-222-xyz")
+  15:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:46  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination"
+  45:     def test_requests_can_be_paginated(self):
+  46:         self.client.token = "xoxb-users_list_pagination"
+  47:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:53  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list_pagination"
+  52:     def test_response_can_be_paginated_multiple_times(self):
+  53:         self.client.token = "xoxb-conversations_list_pagination"
+  54:         # This test suite verifies the changes in #521 work as expected
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:63  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list_pagination2"
+  62:         # (page1 is already cached in `response`)
+  63:         self.client.token = "xoxb-conversations_list_pagination2"
+  64:         ids = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:70  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination_1"
+  69:     def test_request_pagination_stops_when_next_cursor_is_missing(self):
+  70:         self.client.token = "xoxb-users_list_pagination_1"
+  71:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:84  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-500"
+  83:             self.client.api_test()
+  84:         self.client.token = "xoxb-500"
+  85:         with self.assertRaises(err.SlackApiError):
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:89  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-ratelimited"
+  88:     def test_slack_api_rate_limiting_exception_returns_retry_after(self):
+  89:         self.client.token = "xoxb-ratelimited"
+  90:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:99  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_setPhoto"
+  98:     def test_the_api_call_files_argument_creates_the_expected_data(self):
+  99:         self.client.token = "xoxb-users_setPhoto"
+  100:         resp = self.client.users_setPhoto(image="tests/slack_sdk_fixture/slack_logo.png")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:104  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list"
+  103:     def test_issue_560_bool_in_params_sync(self):
+  104:         self.client.token = "xoxb-conversations_list"
+  105:         self.client.conversations_list(exclude_archived=1)  # ok
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:124  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination"
+  123:     def test_issue_705_no_param_request_pagination(self):
+  124:         self.client.token = "xoxb-users_list_pagination"
+  125:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:134  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  133:             client.users_list()
+  134:         resp = client.users_list(token="xoxb-users_list_pagination")
+  135:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:142  (VATA:lucky-aeon default admin creds)
+  token="xoxb-timeout"
+  141:         with self.assertRaises(socket.timeout):
+  142:             client.users_list(token="xoxb-timeout")
+  143: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:147  (VATA:lucky-aeon default admin creds)
+  token="xoxb-html_response"
+  146:         try:
+  147:             client.users_list(token="xoxb-html_response")
+  148:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client.py:167  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  166:         client = WebClient(base_url="http://localhost:8888", team_id="T_DEFAULT")
+  167:         resp = client.users_list(token="xoxb-users_list_pagination")
+  168:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry.py:23  (VATA:lucky-aeon default admin creds)
+  token="xoxb-remote_disconnected"
+  22:             base_url="http://localhost:8888",
+  23:             token="xoxb-remote_disconnected",
+  24:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry.py:38  (VATA:lucky-aeon default admin creds)
+  token="xoxb-ratelimited"
+  37:             base_url="http://localhost:8888",
+  38:             token="xoxb-ratelimited",
+  39:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry.py:51  (VATA:lucky-aeon default admin creds)
+  token="xoxb-ratelimited_only_once"
+  50:             base_url="http://localhost:8888",
+  51:             token="xoxb-ratelimited_only_once",
+  52:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry.py:61  (VATA:lucky-aeon default admin creds)
+  token="xoxb-fatal_error"
+  60:             base_url="http://localhost:8888",
+  61:             token="xoxb-fatal_error",
+  62:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry.py:75  (VATA:lucky-aeon default admin creds)
+  token="xoxb-fatal_error_only_once"
+  74:             base_url="http://localhost:8888",
+  75:             token="xoxb-fatal_error_only_once",
+  76:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry_connection.py:18  (VATA:lucky-aeon default admin creds)
+  token="xoxb-remote_disconnected"
+  17:             base_url="http://localhost:8889",
+  18:             token="xoxb-remote_disconnected",
+  19:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry_server_error.py:49  (VATA:lucky-aeon default admin creds)
+  token="xoxb-error_html_response"
+  48:         try:
+  49:             client.users_list(token="xoxb-error_html_response")
+  50:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_http_retry_server_error.py:71  (VATA:lucky-aeon default admin creds)
+  token="xoxb-server_error_only_once"
+  70:         )
+  71:         client.users_list(token="xoxb-server_error_only_once")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_issue_1049.py:18  (VATA:lucky-aeon default admin creds)
+  token="xoxb-admin_convo_pagination"
+  17:             base_url="http://localhost:8888",
+  18:             token="xoxb-admin_convo_pagination",
+  19:         )
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk/web/test_web_client_issue_829.py:19  (VATA:lucky-aeon default admin creds)
+  token="xoxb-error_html_response"
+  18:         try:
+  19:             client.users_list(token="xoxb-error_html_response")
+  20:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/audit_logs/test_async_client_http_retry.py:22  (VATA:lucky-aeon default admin creds)
+  token="xoxp-remote_disconnected"
+  21:         client = AsyncAuditLogsClient(
+  22:             token="xoxp-remote_disconnected",
+  23:             base_url="http://localhost:8888/",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/audit_logs/test_async_client_http_retry.py:37  (VATA:lucky-aeon default admin creds)
+  token="xoxp-ratelimited"
+  36:         client = AsyncAuditLogsClient(
+  37:             token="xoxp-ratelimited",
+  38:             base_url="http://localhost:8888/",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/installation_store/test_simple_cache.py:25  (VATA:lucky-aeon default admin creds)
+  token="xoxb-111"
+  24:             bot_id="B111",
+  25:             bot_token="xoxb-111",
+  26:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/installation_store/test_simple_cache.py:53  (VATA:lucky-aeon default admin creds)
+  token="xoxb-initial"
+  52:             bot_id="B111",
+  53:             bot_token="xoxb-initial",
+  54:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/installation_store/test_simple_cache.py:56  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  55:             bot_user_id="U222",
+  56:             bot_refresh_token="xoxe-1-initial",
+  57:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/installation_store/test_simple_cache.py:71  (VATA:lucky-aeon default admin creds)
+  token="xoxb-refreshed"
+  70:             bot_id="B111",
+  71:             bot_token="xoxb-refreshed",
+  72:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/installation_store/test_simple_cache.py:74  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-refreshed"
+  73:             bot_user_id="U222",
+  74:             bot_refresh_token="xoxe-1-refreshed",
+  75:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:32  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  31:             bot_id="B111",
+  32:             bot_token="xoxe.xoxp-1-initial",
+  33:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:35  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  34:             bot_user_id="U222",
+  35:             bot_refresh_token="xoxe-1-initial",
+  36:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:56  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  55:             bot_id="B111",
+  56:             bot_token="xoxe.xoxp-1-initial",
+  57:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:59  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  58:             bot_user_id="U222",
+  59:             bot_refresh_token="xoxe-1-initial",
+  60:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:82  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  81:             bot_id="B111",
+  82:             bot_token="xoxe.xoxp-1-initial",
+  83:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:110  (VATA:lucky-aeon default admin creds)
+  token="xoxe.xoxp-1-initial"
+  109:             bot_id="B111",
+  110:             bot_token="xoxe.xoxp-1-initial",
+  111:             bot_scopes=["chat:write"],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/oauth/token_rotation/test_token_rotator.py:113  (VATA:lucky-aeon default admin creds)
+  token="xoxe-1-initial"
+  112:             bot_user_id="U222",
+  113:             bot_refresh_token="xoxe-1-initial",
+  114:             bot_token_expires_in=43200,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/scim/test_async_client.py:22  (VATA:lucky-aeon default admin creds)
+  token="xoxp-valid"
+  21:     async def test_users(self):
+  22:         client = AsyncSCIMClient(base_url="http://localhost:8888/", token="xoxp-valid")
+  23:         await client.search_users(start_index=0, count=1)
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/scim/test_async_client.py:52  (VATA:lucky-aeon default admin creds)
+  token="xoxp-valid"
+  51:     async def test_groups(self):
+  52:         client = AsyncSCIMClient(base_url="http://localhost:8888/", token="xoxp-valid")
+  53:         await client.search_groups(start_index=0, count=1)
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/scim/test_async_client_http_retry.py:23  (VATA:lucky-aeon default admin creds)
+  token="xoxp-remote_disconnected"
+  22:             base_url="http://localhost:8888/",
+  23:             token="xoxp-remote_disconnected",
+  24:             retry_handlers=[retry_handler],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/scim/test_async_client_http_retry.py:39  (VATA:lucky-aeon default admin creds)
+  token="xoxp-ratelimited"
+  38:             base_url="http://localhost:8888/",
+  39:             token="xoxp-ratelimited",
+  40:             retry_handlers=[AsyncRateLimitErrorRetryHandler()],
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:29  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  28:         client = SocketModeClient(
+  29:             app_token="xapp-A111-222-xyz",
+  30:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:42  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  41:         client = SocketModeClient(
+  42:             app_token="xapp-A111-222-xyz",
+  43:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:55  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  54:         client = SocketModeClient(
+  55:             app_token="xapp-A111-222-xyz",
+  56:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:77  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  76:         client = SocketModeClient(
+  77:             app_token="xapp-A111-222-xyz",
+  78:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:107  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  106:         client = SocketModeClient(
+  107:             app_token="xapp-A111-222-xyz",
+  108:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:132  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  131:         client = SocketModeClient(
+  132:             app_token="xapp-A111-222-xyz",
+  133:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:145  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  144:         client = SocketModeClient(
+  145:             app_token="xapp-A111-222-xyz",
+  146:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_aiohttp.py:173  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  172:         client = SocketModeClient(
+  173:             app_token="xapp-A111-222-xyz",
+  174:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_interactions_aiohttp.py:62  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  61:         client = SocketModeClient(
+  62:             app_token="xapp-A111-222-xyz",
+  63:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_interactions_aiohttp.py:122  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  121:         client = SocketModeClient(
+  122:             app_token="xapp-A111-222-xyz",
+  123:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_interactions_aiohttp.py:182  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  181:         client = SocketModeClient(
+  182:             app_token="xapp-A111-222-xyz",
+  183:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_interactions_websockets.py:67  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  66:         client = SocketModeClient(
+  67:             app_token="xapp-A111-222-xyz",
+  68:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_interactions_websockets.py:104  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  103:         client = SocketModeClient(
+  104:             app_token="xapp-A111-222-xyz",
+  105:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_websockets.py:23  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  22:     async def test_init_close(self):
+  23:         client = SocketModeClient(app_token="xapp-A111-222-xyz")
+  24:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_websockets.py:32  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  31:         client = SocketModeClient(
+  32:             app_token="xapp-A111-222-xyz",
+  33:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_websockets.py:44  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  43:         client = SocketModeClient(
+  44:             app_token="xapp-A111-222-xyz",
+  45:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/socket_mode/test_websockets.py:58  (VATA:lucky-aeon default admin creds)
+  token="xapp-A111-222-xyz"
+  57:         client = SocketModeClient(
+  58:             app_token="xapp-A111-222-xyz",
+  59:             web_client=self.web_client,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:16  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  15:         self.client = AsyncWebClient(
+  16:             token="xoxp-1234",
+  17:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:35  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination"
+  34:     async def test_requests_can_be_paginated(self):
+  35:         self.client.token = "xoxb-users_list_pagination"
+  36:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:43  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination_1"
+  42:     async def test_request_pagination_stops_when_next_cursor_is_missing(self):
+  43:         self.client.token = "xoxb-users_list_pagination_1"
+  44:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:59  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-500"
+  58:             await self.client.api_test()
+  59:         self.client.token = "xoxb-500"
+  60:         with self.assertRaises(err.SlackApiError):
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:65  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-ratelimited"
+  64:     async def test_slack_api_rate_limiting_exception_returns_retry_after(self):
+  65:         self.client.token = "xoxb-ratelimited"
+  66:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:76  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_setPhoto"
+  75:     async def test_the_api_call_files_argument_creates_the_expected_data(self):
+  76:         self.client.token = "xoxb-users_setPhoto"
+  77:         resp = await self.client.users_setPhoto(image="tests/slack_sdk_fixture/slack_logo.png")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:82  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list"
+  81:     async def test_issue_560_bool_in_params_sync(self):
+  82:         self.client.token = "xoxb-conversations_list"
+  83:         await self.client.conversations_list(exclude_archived=1)  # ok
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:115  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  114:             await self.client.users_list()
+  115:         resp = await self.client.users_list(token="xoxb-users_list_pagination")
+  116:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:123  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  122:         client = AsyncWebClient(
+  123:             token="xoxp-1234",
+  124:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:128  (VATA:lucky-aeon default admin creds)
+  token="xoxb-timeout"
+  127:         with self.assertRaises(Exception):
+  128:             await client.users_list(token="xoxb-timeout")
+  129: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:133  (VATA:lucky-aeon default admin creds)
+  token="xoxb-html_response"
+  132:         try:
+  133:             await self.client.users_list(token="xoxb-html_response")
+  134:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client.py:156  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  155:         client = AsyncWebClient(base_url="http://localhost:8888", team_id="T_DEFAULT")
+  156:         resp = await client.users_list(token="xoxb-users_list_pagination")
+  157:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:25  (VATA:lucky-aeon default admin creds)
+  token="xoxb-remote_disconnected"
+  24:             base_url="http://localhost:8888",
+  25:             token="xoxb-remote_disconnected",
+  26:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:41  (VATA:lucky-aeon default admin creds)
+  token="xoxb-ratelimited"
+  40:             base_url="http://localhost:8888",
+  41:             token="xoxb-ratelimited",
+  42:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:55  (VATA:lucky-aeon default admin creds)
+  token="xoxb-ratelimited_only_once"
+  54:             base_url="http://localhost:8888",
+  55:             token="xoxb-ratelimited_only_once",
+  56:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:66  (VATA:lucky-aeon default admin creds)
+  token="xoxb-fatal_error"
+  65:             base_url="http://localhost:8888",
+  66:             token="xoxb-fatal_error",
+  67:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:79  (VATA:lucky-aeon default admin creds)
+  token="xoxb-fatal_error_only_once"
+  78:             base_url="http://localhost:8888",
+  79:             token="xoxb-fatal_error_only_once",
+  80:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:90  (VATA:lucky-aeon default admin creds)
+  token="xoxp-remote_disconnected"
+  89:         client = AsyncWebClient(
+  90:             token="xoxp-remote_disconnected",
+  91:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_async_web_client_http_retry.py:106  (VATA:lucky-aeon default admin creds)
+  token="xoxb-server_error_only_once"
+  105:             base_url="http://localhost:8888",
+  106:             token="xoxb-server_error_only_once",
+  107:             team_id="T111",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_web_client_coverage.py:27  (VATA:lucky-aeon default admin creds)
+  token="xoxb-coverage"
+  26:         setup_mock_web_api_server_async(self, MockHandler)
+  27:         self.client = WebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+  28:         self.legacy_client = LegacyWebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_web_client_coverage.py:28  (VATA:lucky-aeon default admin creds)
+  token="xoxb-coverage"
+  27:         self.client = WebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+  28:         self.legacy_client = LegacyWebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+  29:         self.async_client = AsyncWebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_web_client_coverage.py:29  (VATA:lucky-aeon default admin creds)
+  token="xoxb-coverage"
+  28:         self.legacy_client = LegacyWebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+  29:         self.async_client = AsyncWebClient(token="xoxb-coverage", base_url="http://localhost:8888")
+  30: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_web_client_coverage.py:943  (VATA:lucky-aeon default admin creds)
+  token="xoxe-refresh"
+  942:             elif method_name == "tooling_tokens_rotate":
+  943:                 self.api_methods_to_call.remove(method(refresh_token="xoxe-refresh")["method"])
+  944:                 await async_method(refresh_token="xoxe-refresh")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_web_client_coverage.py:944  (VATA:lucky-aeon default admin creds)
+  token="xoxe-refresh"
+  943:                 self.api_methods_to_call.remove(method(refresh_token="xoxe-refresh")["method"])
+  944:                 await async_method(refresh_token="xoxe-refresh")
+  945:             elif method_name == "usergroups_create":
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/slack_sdk_async/web/test_web_client_issue_829.py:21  (VATA:lucky-aeon default admin creds)
+  token="xoxb-error_html_response"
+  20:         try:
+  21:             await client.users_list(token="xoxb-error_html_response")
+  22:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:16  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  15:         self.client = AsyncWebClient(
+  16:             token="xoxp-1234",
+  17:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:35  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination"
+  34:     async def test_requests_can_be_paginated(self):
+  35:         self.client.token = "xoxb-users_list_pagination"
+  36:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:43  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination_1"
+  42:     async def test_request_pagination_stops_when_next_cursor_is_missing(self):
+  43:         self.client.token = "xoxb-users_list_pagination_1"
+  44:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:59  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-500"
+  58:             await self.client.api_test()
+  59:         self.client.token = "xoxb-500"
+  60:         with self.assertRaises(err.SlackApiError):
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:65  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-ratelimited"
+  64:     async def test_slack_api_rate_limiting_exception_returns_retry_after(self):
+  65:         self.client.token = "xoxb-ratelimited"
+  66:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:76  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_setPhoto"
+  75:     async def test_the_api_call_files_argument_creates_the_expected_data(self):
+  76:         self.client.token = "xoxb-users_setPhoto"
+  77:         resp = await self.client.users_setPhoto(image="tests/data/slack_logo.png")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:82  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list"
+  81:     async def test_issue_560_bool_in_params_sync(self):
+  82:         self.client.token = "xoxb-conversations_list"
+  83:         await self.client.conversations_list(exclude_archived=1)  # ok
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:115  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  114:             await self.client.users_list()
+  115:         resp = await self.client.users_list(token="xoxb-users_list_pagination")
+  116:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:123  (VATA:lucky-aeon default admin creds)
+  token="xoxb-timeout"
+  122:         with self.assertRaises(Exception):
+  123:             await self.client.users_list(token="xoxb-timeout")
+  124: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_async_web_client.py:128  (VATA:lucky-aeon default admin creds)
+  token="xoxb-html_response"
+  127:         try:
+  128:             await self.client.users_list(token="xoxb-html_response")
+  129:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:18  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  17:         self.client = WebClient(
+  18:             token="xoxp-1234",
+  19:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:22  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  21:         self.async_client = WebClient(
+  22:             token="xoxp-1234",
+  23:             run_async=True,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:61  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination"
+  60:     def test_requests_can_be_paginated(self):
+  61:         self.client.token = "xoxb-users_list_pagination"
+  62:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:68  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-channels_list_pagination"
+  67:     def test_response_can_be_paginated_multiple_times(self):
+  68:         self.client.token = "xoxb-channels_list_pagination"
+  69:         # This test suite verifies the changes in #521 work as expected
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:78  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-channels_list_pagination2"
+  77:         # (page1 is already cached in `response`)
+  78:         self.client.token = "xoxb-channels_list_pagination2"
+  79:         ids = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:85  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination_1"
+  84:     def test_request_pagination_stops_when_next_cursor_is_missing(self):
+  85:         self.client.token = "xoxb-users_list_pagination_1"
+  86:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:93  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  92:         self.client = WebClient(
+  93:             token="xoxp-1234",
+  94:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:98  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-channels_list_pagination"
+  97:         )
+  98:         self.client.token = "xoxb-channels_list_pagination"
+  99:         # This test suite verifies the changes in #521 work as expected
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:108  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-channels_list_pagination2"
+  107:         # (page1 is already cached in `response`)
+  108:         self.client.token = "xoxb-channels_list_pagination2"
+  109:         ids = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:122  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-500"
+  121:             self.client.api_test()
+  122:         self.client.token = "xoxb-500"
+  123:         with self.assertRaises(err.SlackApiError):
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:127  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-ratelimited"
+  126:     def test_slack_api_rate_limiting_exception_returns_retry_after(self):
+  127:         self.client.token = "xoxb-ratelimited"
+  128:         try:
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:137  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_setPhoto"
+  136:     def test_the_api_call_files_argument_creates_the_expected_data(self):
+  137:         self.client.token = "xoxb-users_setPhoto"
+  138:         resp = self.client.users_setPhoto(image="tests/data/slack_logo.png")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:142  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list"
+  141:     def test_issue_560_bool_in_params_sync(self):
+  142:         self.client.token = "xoxb-conversations_list"
+  143:         self.client.conversations_list(exclude_archived=1)  # ok
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:149  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-conversations_list"
+  148:     async def test_issue_560_bool_in_params_async(self):
+  149:         self.async_client.token = "xoxb-conversations_list"
+  150:         await self.async_client.conversations_list(exclude_archived=1)  # ok
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:193  (VATA:lucky-aeon default admin creds)
+  token = "xoxb-users_list_pagination"
+  192:     def test_issue_705_no_param_request_pagination(self):
+  193:         self.client.token = "xoxb-users_list_pagination"
+  194:         users = []
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:203  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  202:             client.users_list()
+  203:         resp = client.users_list(token="xoxb-users_list_pagination")
+  204:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:213  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  212:             await client.users_list()
+  213:         resp = await client.users_list(token="xoxb-users_list_pagination")
+  214:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:221  (VATA:lucky-aeon default admin creds)
+  token="xoxb-timeout"
+  220:         with self.assertRaises(socket.timeout):
+  221:             client.users_list(token="xoxb-timeout")
+  222: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:227  (VATA:lucky-aeon default admin creds)
+  token="xoxb-timeout"
+  226:         with self.assertRaises(asyncio.TimeoutError):
+  227:             await client.users_list(token="xoxb-timeout")
+  228: 
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:258  (VATA:lucky-aeon default admin creds)
+  token="xoxb-html_response"
+  257:         try:
+  258:             client.users_list(token="xoxb-html_response")
+  259:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:270  (VATA:lucky-aeon default admin creds)
+  token="xoxb-html_response"
+  269:         try:
+  270:             await client.users_list(token="xoxb-html_response")
+  271:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client.py:313  (VATA:lucky-aeon default admin creds)
+  token="xoxb-users_list_pagination"
+  312:         client = WebClient(base_url="http://localhost:8888", team_id="T_DEFAULT")
+  313:         resp = client.users_list(token="xoxb-users_list_pagination")
+  314:         self.assertIsNone(resp["error"])
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client_issue_829.py:14  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  13:         self.client = WebClient(
+  14:             token="xoxp-1234",
+  15:             base_url="http://localhost:8888",
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client_issue_829.py:18  (VATA:lucky-aeon default admin creds)
+  token="xoxp-1234"
+  17:         self.async_client = WebClient(
+  18:             token="xoxp-1234",
+  19:             run_async=True,
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client_issue_829.py:29  (VATA:lucky-aeon default admin creds)
+  token="xoxb-error_html_response"
+  28:         try:
+  29:             client.users_list(token="xoxb-error_html_response")
+  30:             self.fail("SlackApiError expected here")
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  slack-sdk-python/tests/web/test_web_client_issue_829.py:41  (VATA:lucky-aeon default admin creds)
+  token="xoxb-error_html_response"
+  40:         try:
+  41:             await client.users_list(token="xoxb-error_html_response")
+  42:             self.fail("SlackApiError expected here")
+
+208 finding(s).

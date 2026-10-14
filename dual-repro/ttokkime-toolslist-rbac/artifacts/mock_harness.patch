@@ -1,0 +1,127 @@
+diff --git a/cmd/mockmcp/main.go b/cmd/mockmcp/main.go
+index 64915b2..61e5b49 100644
+--- a/cmd/mockmcp/main.go
++++ b/cmd/mockmcp/main.go
+@@ -1,9 +1,4 @@
+-// Command mockmcp is a minimal MCP upstream used for load testing and local
+-// development. It answers JSON-RPC requests with a canned result and can inject
+-// latency or failures via flags so the gateway's timeout, redaction, and
+-// circuit-breaker paths can be exercised under load.
+-//
+-// Usage:
++// Command mockmcp is a stand-in upstream MCP server for gateway testing.
+ //
+ //	mockmcp -addr :9000 -latency 2ms -fail-rate 0.0
+ package main
+@@ -41,17 +36,107 @@ func main() {
+ 		body, _ := io.ReadAll(r.Body)
+ 		_ = json.Unmarshal(body, &req)
+ 
++		w.Header().Set("Content-Type", "application/json")
++
++		// tools/list advertises the FULL upstream catalog — including a
++		// destructive tool a scoped tenant must not be able to invoke.
++		if req.Method == "tools/list" {
++			tools := []map[string]any{
++				{
++					"name":        "search",
++					"description": "Full-text search over the corpus.",
++					"inputSchema": map[string]any{
++						"type":       "object",
++						"properties": map[string]any{"query": map[string]any{"type": "string"}},
++						"required":   []string{"query"},
++					},
++				},
++				{
++					"name":        "fetch",
++					"description": "Fetch a document by id.",
++					"inputSchema": map[string]any{
++						"type":       "object",
++						"properties": map[string]any{"id": map[string]any{"type": "string"}},
++						"required":   []string{"id"},
++					},
++				},
++				{
++					"name":        "delete_all",
++					"description": "DESTRUCTIVE: permanently delete every document in the tenant workspace.",
++					"inputSchema": map[string]any{
++						"type": "object",
++						"properties": map[string]any{
++							"confirm": map[string]any{"type": "boolean"},
++							"scope":   map[string]any{"type": "string", "enum": []string{"workspace", "global"}},
++						},
++						"required": []string{"confirm"},
++					},
++				},
++			}
++			_ = json.NewEncoder(w).Encode(map[string]any{
++				"jsonrpc": "2.0",
++				"id":      req.ID,
++				"result":  map[string]any{"tools": tools},
++			})
++			return
++		}
++
++		// resources/list + resources/read: NOT gated by the RBAC check (which
++		// only guards tools/call), so a scoped tenant reaches these. Fixtures
++		// below exercise (a) secret egress the redactor misses, (b) PII the
++		// redactor catches, (c) SSE/non-JSON content-type that bypasses redaction.
++		if req.Method == "resources/list" {
++			_ = json.NewEncoder(w).Encode(map[string]any{
++				"jsonrpc": "2.0", "id": req.ID,
++				"result": map[string]any{"resources": []map[string]any{
++					{"uri": "file:///vault/customer-pii.txt", "name": "customer-pii",
++						"description": "Customer PII export (RESTRICTED)", "mimeType": "text/plain"},
++					{"uri": "file:///vault/deploy-secrets.env", "name": "deploy-secrets",
++						"description": "CI deploy secrets (RESTRICTED)", "mimeType": "text/plain"},
++				}},
++			})
++			return
++		}
++		if req.Method == "resources/read" {
++			var pr struct {
++				Params struct {
++					URI string `json:"uri"`
++				} `json:"params"`
++			}
++			_ = json.Unmarshal(body, &pr)
++			if pr.Params.URI == "file:///vault/deploy-secrets.env" {
++				secret := `AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
++AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
++DB_HOST=prod-db.internal.acme.corp`
++				_ = json.NewEncoder(w).Encode(map[string]any{
++					"jsonrpc": "2.0", "id": req.ID,
++					"result": map[string]any{"contents": []map[string]any{
++						{"uri": pr.Params.URI, "mimeType": "text/plain", "text": secret},
++					}},
++				})
++				return
++			}
++			pii := `ACME Corp customer export
++jane.doe@example.com,4111-1111-1111-1111
++john.roe@example.com,5555-5555-5555-4444`
++			_ = json.NewEncoder(w).Encode(map[string]any{
++				"jsonrpc": "2.0", "id": req.ID,
++				"result": map[string]any{"contents": []map[string]any{
++					{"uri": "file:///vault/customer-pii.txt", "mimeType": "text/plain", "text": pii},
++				}},
++			})
++			return
++		}
++		// everything else: echo (exercises PII redaction on the response path).
+ 		text := "hello from mockmcp"
+ 		if *leakPII {
+ 			text = "contact support@corp.com for help"
+ 		}
+-		resp := map[string]any{
++		_ = json.NewEncoder(w).Encode(map[string]any{
+ 			"jsonrpc": "2.0",
+ 			"id":      req.ID,
+ 			"result":  map[string]any{"content": []map[string]string{{"type": "text", "text": text}}},
+-		}
+-		w.Header().Set("Content-Type", "application/json")
+-		_ = json.NewEncoder(w).Encode(resp)
++		})
+ 	})
+ 
+ 	log.Printf("mockmcp listening on %s (latency=%s fail-rate=%.2f)", *addr, *latency, *failRate)

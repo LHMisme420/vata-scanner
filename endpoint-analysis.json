@@ -1,0 +1,167 @@
+{
+  "path": "/account",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/collections",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/collections/{collection_slug}",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/deployments",
+  "methods": [
+    "get",
+    "post"
+  ]
+}
+{
+  "path": "/deployments/{deployment_owner}/{deployment_name}",
+  "methods": [
+    "delete",
+    "get",
+    "patch"
+  ]
+}
+{
+  "path": "/deployments/{deployment_owner}/{deployment_name}/predictions",
+  "methods": [
+    "post"
+  ]
+}
+{
+  "path": "/files",
+  "methods": [
+    "get",
+    "post"
+  ]
+}
+{
+  "path": "/files/{file_id}",
+  "methods": [
+    "delete",
+    "get"
+  ]
+}
+{
+  "path": "/files/{file_id}/download",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/hardware",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/models",
+  "methods": [
+    "get",
+    "post",
+    "query"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}",
+  "methods": [
+    "delete",
+    "get",
+    "patch"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}/examples",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}/predictions",
+  "methods": [
+    "post"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}/readme",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}/versions",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}/versions/{version_id}",
+  "methods": [
+    "delete",
+    "get"
+  ]
+}
+{
+  "path": "/models/{model_owner}/{model_name}/versions/{version_id}/trainings",
+  "methods": [
+    "post"
+  ]
+}
+{
+  "path": "/predictions",
+  "methods": [
+    "get",
+    "post"
+  ]
+}
+{
+  "path": "/predictions/{prediction_id}",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/predictions/{prediction_id}/cancel",
+  "methods": [
+    "post"
+  ]
+}
+{
+  "path": "/search",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/trainings",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/trainings/{training_id}",
+  "methods": [
+    "get"
+  ]
+}
+{
+  "path": "/trainings/{training_id}/cancel",
+  "methods": [
+    "post"
+  ]
+}
+{
+  "path": "/webhooks/default/secret",
+  "methods": [
+    "get"
+  ]
+}

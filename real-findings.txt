@@ -1,0 +1,7 @@
+[!] https://api.modal.com/api
+[!] https://api.modal.com/v1
+[!] https://api.modal.com/v2
+[!] https://api.modal.com/models
+[!] https://api.modal.com/predictions
+[!] https://api.modal.com/inference
+[!] https://api.modal.com/completions

@@ -1,0 +1,107 @@
+skipped 48 test/fixture path(s); pass --include-tests to scan them
+[MEDIUM/LOW] A1  OAuth authorize handler reads client_id — verify validation (here or in a downstream service)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/authserver/authorize.go:19  (VATA:lucky-aeon auth-bypass/ATO chain (review-list))
+  handler reads client_id with no validation/allowlist in THIS function; confirm it is enforced here or in a called service
+  18: // failure goes back to the client as a redirect with error parameters.
+  19: func (s *Server) handleAuthorize(w http.ResponseWriter, r *http.Request) {
+  20: 	q := r.URL.Query()
+
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/authserver/token.go:59  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  58: 	// Binding the code to the client that requested it stops a malicious
+  59: 	// client from redeeming a code it observed.
+  60: 	if cid := f.Get("client_id"); cid != g.ClientID {
+
+[MEDIUM/LOW] A1  OAuth authorize handler reads redirect_uri — verify validation (here or in a downstream service)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/authserver/upstream.go:88  (VATA:lucky-aeon auth-bypass/ATO chain (review-list))
+  handler reads redirect_uri with no validation/allowlist in THIS function; confirm it is enforced here or in a called service
+  87: // AuthorizeURL builds the upstream authorization request carrying state.
+  88: func (f *OIDCFederator) AuthorizeURL(state string) (string, error) {
+  89: 	if state == "" {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/inbound/github.go:178  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: v.baseURL+path
+  177: func (v *githubValidator) get(r *http.Request, tok, path string, out any) error {
+  178: 	req, err := http.NewRequestWithContext(r.Context(), http.MethodGet, v.baseURL+path, nil)
+  179: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/outbound/oauth/dcr.go:103  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: registrationEndpoint
+  102: 
+  103: 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, registrationEndpoint, bytes.NewReader(body))
+  104: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/outbound/oauth/discovery.go:291  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: rawURL
+  290: func fetchJSON(ctx context.Context, hc *http.Client, rawURL string, v any) error {
+  291: 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, rawURL, nil)
+  292: 	if err != nil {
+
+[MEDIUM/LOW] A1  OAuth authorize handler reads client_id, redirect_uri — verify validation (here or in a downstream service)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/outbound/oauth/flow.go:104  (VATA:lucky-aeon auth-bypass/ATO chain (review-list))
+  handler reads client_id/redirect_uri with no validation/allowlist in THIS function; confirm it is enforced here or in a called service
+  103: // PKCE challenge.
+  104: func BuildAuthorizeURL(cfg ClientConfig, redirectURI, state, challenge string) (string, error) {
+  105: 	if cfg.AuthEndpoint == "" {
+
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/outbound/oauth/flow.go:191  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  190: 
+  191: // ExchangeCode redeems an authorization code at the token endpoint.
+  192: // A non-empty verifier adds the PKCE code_verifier.
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/auth/outbound/oauth/flow.go:249  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: cfg.TokenEndpoint
+  248: 
+  249: 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, cfg.TokenEndpoint, strings.NewReader(form.Encode()))
+  250: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/backend/remote.go:157  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: b.url
+  156: 
+  157: 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, b.url, bytes.NewReader(msg))
+  158: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/backend/sse.go:122  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: b.url
+  121: 
+  122: 	req, err := http.NewRequestWithContext(streamCtx, http.MethodGet, b.url, nil)
+  123: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/backend/sse.go:302  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: endpoint
+  301: 
+  302: 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, endpoint, bytes.NewReader(msg))
+  303: 	if err != nil {
+
+[MEDIUM/LOW] A6  Authz check gated on a specific method/path - verify other methods are not bypassed (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/checks/s2cgate.go:46  (VATA:ttokkime method-scoped RBAC (tools/list bypass))
+  if m.Env.Method == "" {
+  45: 	}
+  46: 	if m.Env.Method == "" {
+  47: 		return g.inspectResult(m)
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/cmd/mcpsmoke/main.go:77  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.url
+  76: 	}
+  77: 	req, err := http.NewRequest(http.MethodPost, c.url, bytes.NewReader(b))
+  78: 	if err != nil {
+
+[MEDIUM/LOW] A6  Authz check gated on a specific method/path - verify other methods are not bypassed (review each)
+  /home/lhmisme/vata/triage/hoophq-mcpproxy/gateway/conn.go:198  (VATA:ttokkime method-scoped RBAC (tools/list bypass))
+  if method == mcp.MethodToolsCall {
+  197: 			method = m.Env.Method
+  198: 			if method == mcp.MethodToolsCall {
+  199: 				tool = inspect.RawTool(m.Env.Params)
+
+15 finding(s).

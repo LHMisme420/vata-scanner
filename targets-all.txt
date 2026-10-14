@@ -1,0 +1,17 @@
+http://www.w3.org/2000/svg
+https://api.coinrithm.com\
+https://api.plane.so/\
+https://app.searcherries.com/mcp/searcherries\
+https://app.snap-render.com/mcp\
+https://aziel-runtime.vibelock.workers.dev\
+https://gate.horizonshield.dev/mcp\
+https://mcp.thecoindaily.co/mcp\
+https://schema.org
+https://schema.org\
+https://snap-render.com/ai-agents\
+https://snap-render.com\\n\\nDocs:
+https://spdx.org/licenses/AGPL-3.0.json\
+https://spdx.org/licenses/Apache-2.0.json\
+https://spdx.org/licenses/ISC.json\
+https://spdx.org/licenses/MIT.json\
+https://tribeunal.com/api.\

@@ -1,0 +1,24 @@
+Subject: Security: Critical OAuth 2.1 Vulnerabilities in lucky-aeon/mcp-gateway
+
+To: security@lucky-aeon.com (or GitHub security contact)
+
+Dear lucky-aeon Security Team,
+
+I've identified 4 critical OAuth 2.0/2.1 vulnerabilities in your MCP gateway implementation 
+that allow complete account takeover:
+
+1. Unvalidated redirect_uri (CRITICAL - CVSS 8.6)
+2. redirect_uri bypass logic bug (CRITICAL)
+3. No client authentication required (HIGH)
+4. PKCE validation optional (HIGH)
+
+Timeline: 90-day coordinated disclosure from this email.
+
+Complete technical details attached. I'm available for a call to discuss remediation.
+
+This work was conducted as part of independent AI security research 
+under the VATA (Vulnerability Assessment and Tracking Archive) program.
+
+Regards,
+Leroy
+lhmisme2011@gmail.com

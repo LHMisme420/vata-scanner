@@ -1,0 +1,387 @@
+skipped 310 test/fixture path(s); pass --include-tests to scan them
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/client/src/client/authExtensions.examples.ts:36  (VATA:lucky-aeon default admin creds)
+  Secret: 'my-secret'
+  35:         clientId: 'my-client',
+  36:         clientSecret: 'my-secret',
+  37:         expectedIssuer: 'https://auth.example.com'
+
+[HIGH/HIGH] B1  PKCE validation explicitly disabled
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server-legacy/src/auth/providers/proxyProvider.ts:48  (VATA:webrix skipLocalPkceValidation)
+  skipLocalPkceValidation=true with no local verifier check taking over
+  47: 
+  48:     skipLocalPkceValidation = true;
+  49: 
+
+[HIGH/MEDIUM] C3  Issuer validation disabled - mix-up / credential redirection guard turned off
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/test/e2e/requirements.ts:2291  (RFC 8414 s3.3 / RFC 9207 / SEP-2352 escape hatch)
+  skipIssuerMetadataValidation: true
+  2290:         behavior:
+  2291:             'AuthOptions.skipIssuerMetadataValidation: true suppresses only the RFC 8414 §3.3 metadata-issuer-echo check (AU-02) — it does not relax the RFC 9207 callback-iss validation, which continues to reject mismatches.',
+  2292:         transports: ['streamableHttp'],
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/bearer-auth-web/client.ts:13  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  12: // Unauthenticated → 401 + WWW-Authenticate.
+  13: const unauth = await fetch(url, {
+  14:     method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/bearer-auth/client.ts:12  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  11: // Unauthenticated → 401 + WWW-Authenticate.
+  12: const unauth = await fetch(url, {
+  13:     method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/caching/server.ts:101  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  100:     const app = createMcpHonoApp();
+  101:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  102:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/custom-methods/server.ts:40  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  39:     const app = createMcpHonoApp();
+  40:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  41:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/custom-version/server.ts:38  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  37:     const app = createMcpHonoApp();
+  38:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  39:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/dual-era/server.ts:54  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  53:     const app = createMcpHonoApp();
+  54:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  55:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/extension-capabilities/server.ts:36  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  35:     const app = createMcpHonoApp();
+  36:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  37:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/advanced/custom-transports.examples.ts:141  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: this.endpoint
+  140:     async send(message: JSONRPCMessage, options?: TransportSendOptions): Promise<void> {
+  141:         const response = await fetch(this.endpoint, {
+  142:             method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/clients/caching.examples.ts:70  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: new Request(url
+  69:         }
+  70:         return handler.fetch(new Request(url, init));
+  71:     }
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/clients/middleware.examples.ts:114  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: new Request(url
+  113: type AnyFetch = (url: string | URL, init?: RequestInit) => Promise<Response>;
+  114: const serverFetch: AnyFetch = (url, init) => handler.fetch(new Request(url, init));
+  115: 
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/clients/subscriptions.examples.ts:63  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: new Request(url
+  62:         new StreamableHTTPClientTransport(new URL('http://localhost/mcp'), {
+  63:             fetch: (url, init) => target.fetch(new Request(url, init))
+  64:         })
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/get-started/firstServer.examples.ts:40  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  39:             const url = `${NWS_API}/alerts/active?area=${code}`;
+  40:             const res = await fetch(url, { headers: { 'User-Agent': 'mcp-weather-tutorial/1.0' } });
+  41:             if (!res.ok) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/get-started/realHost.examples.ts:46  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  45:             const url = `${NWS_API}/alerts/active?area=${code}`;
+  46:             const res = await fetch(url, { headers: { 'User-Agent': 'mcp-weather-tutorial/1.0' } });
+  47:             if (!res.ok) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/get-started/src/index.ts:40  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  39:             const url = `${NWS_API}/alerts/active?area=${code}`;
+  40:             const res = await fetch(url, { headers: { 'User-Agent': 'mcp-weather-tutorial/1.0' } });
+  41:             if (!res.ok) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/servers/logging-progress-cancellation.examples.ts:107  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: SOURCE_URLS[source]
+  106:     async ({ source }, ctx) => {
+  107:         const response = await fetch(SOURCE_URLS[source], { signal: ctx.mcpReq.signal });
+  108:         return { content: [{ type: 'text', text: await response.text() }] };
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/hono.examples.ts:33  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  32: const app = createMcpHonoApp();
+  33: app.all('/mcp', (c: Context) => handler.fetch(c.req.raw, { parsedBody: c.get('parsedBody') }));
+  34: 
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/hono.examples.ts:53  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  52:     const authInfo = await verifyToken(c.req.raw);
+  53:     return handler.fetch(c.req.raw, { authInfo, parsedBody: c.get('parsedBody') });
+  54: });
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/http.examples.ts:124  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: new Request(url
+  123:     new StreamableHTTPClientTransport(new URL('http://localhost/mcp'), {
+  124:         fetch: (url, init) => handler.fetch(new Request(url, init))
+  125:     })
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/http.examples.ts:137  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: new Request(url
+  136:     new StreamableHTTPClientTransport(new URL('http://localhost/mcp'), {
+  137:         fetch: (url, init) => perCaller.fetch(new Request(url, init), { authInfo })
+  138:     })
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/webStandard.examples.ts:79  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: curlRequest(
+  78: 
+  79: const response = await handler.fetch(curlRequest());
+  80: const text = await response.text();
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/webStandard.examples.ts:92  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: curlRequest(
+  91: // "Protect against DNS rebinding": a Host outside the allowlist never reaches `fetch`.
+  92: const guardedResponse = await guarded.fetch(curlRequest());
+  93: if (guardedResponse.status !== 403) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/serving/webStandard.examples.ts:98  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: curlRequest(
+  97: // "Forward auth and the parsed body": the secured wrapper still serves the request.
+  98: const securedResponse = await secured.fetch(curlRequest());
+  99: if (securedResponse.status !== 200) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/guides/testing.examples.ts:49  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: new Request(url
+  48: const transport = new StreamableHTTPClientTransport(new URL('http://test.local/mcp'), {
+  49:     fetch: (url, init) => handler.fetch(new Request(url, init))
+  50: });
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/hono/server.ts:34  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  33: app.get('/health', c => c.json({ status: 'ok' }));
+  34: app.all('/mcp', c => handler.fetch(c.req.raw));
+  35: serve({ fetch: app.fetch, port }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/json-response/client.ts:21  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  20: // the JSON content-type assertion is the point of the story.
+  21: const probe = await fetch(url, {
+  22:     method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/json-response/server.ts:34  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  33: const app = createMcpHonoApp();
+  34: app.all('/mcp', c => handler.fetch(c.req.raw));
+  35: serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/mrtr/server.ts:119  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  118:     const app = createMcpHonoApp();
+  119:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  120:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/oauth-client-credentials/client.ts:22  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  21: // Unauthenticated → 401 + WWW-Authenticate naming the PRM URL.
+  22: const unauth = await fetch(url, {
+  23:     method: 'POST',
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/parallel-calls/server.ts:47  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  46:     const app = createMcpHonoApp();
+  47:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  48:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/prompts/server.ts:52  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  51:     const app = createMcpHonoApp();
+  52:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  53:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/resources/server.ts:96  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  95:     const app = createMcpHonoApp();
+  96:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  97:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/sampling/server.ts:76  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  75:     const app = createMcpHonoApp();
+  76:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  77:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/schema-validators/server.ts:85  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  84:     const app = createMcpHonoApp();
+  85:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  86:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/scoped-tools/client.ts:26  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: authorizationUrl
+  25: async function followAuthorize(authorizationUrl: URL): Promise<string> {
+  26:     const res = await fetch(authorizationUrl, { redirect: 'manual' });
+  27:     const location = res.headers.get('location');
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/server-quickstart/src/index.ts:19  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  18:   try {
+  19:     const response = await fetch(url, { headers });
+  20:     if (!response.ok) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/stateless-legacy/server.ts:36  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  35: const app = createMcpHonoApp();
+  36: app.all('/mcp', c => handler.fetch(c.req.raw));
+  37: serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/stickynotes/server.ts:126  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  125:     const app = createMcpHonoApp();
+  126:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  127:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/streaming/server.ts:70  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  69:     const app = createMcpHonoApp();
+  70:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  71:     serve({ fetch: app.fetch, hostname: '127.0.0.1', port }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/subscriptions/server.ts:88  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  87:     const app = createMcpHonoApp();
+  88:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  89:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/todos-server/server.ts:28  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  27:     const app = createMcpHonoApp();
+  28:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  29:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/examples/tools/server.ts:64  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.req.raw
+  63:     const app = createMcpHonoApp();
+  64:     app.all('/mcp', c => handler.fetch(c.req.raw));
+  65:     serve({ fetch: app.fetch, port, hostname: '127.0.0.1' }, () => {
+
+[MEDIUM/MEDIUM] B1  PKCE code_verifier received but never validated
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server-legacy/src/auth/handlers/token.ts:98  (VATA:atrawog/webrix verifier-never-hashed)
+  code_verifier received as input; no SHA-256/S256 transform in this file
+  97: 
+  98:                     const { code, code_verifier, redirect_uri, resource } = parseResult.data;
+  99: 
+
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server-legacy/src/auth/handlers/token.ts:112  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  111:                     // Passes the code_verifier to the provider if PKCE validation didn't occur locally
+  112:                     const tokens = await provider.exchangeAuthorizationCode(
+  113:                         client,
+
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server-legacy/src/auth/provider.ts:58  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  57:      */
+  58:     exchangeAuthorizationCode(
+  59:         client: OAuthClientInformationFull,
+
+[MEDIUM/MEDIUM] B1  PKCE code_verifier received but never validated
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server-legacy/src/auth/provider.ts:61  (VATA:atrawog/webrix verifier-never-hashed)
+  code_verifier received as input; no SHA-256/S256 transform in this file
+  60:         authorizationCode: string,
+  61:         codeVerifier?: string,
+  62:         redirectUri?: string,
+
+[MEDIUM/MEDIUM] B2  Authorization code redeemed but never invalidated (same-file)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server-legacy/src/auth/providers/proxyProvider.ts:154  (VATA:webrix auth-code replay)
+  code redeemed/looked up here; no delete/mark-used/revoke in this file -- confirm storage layer before filing
+  153: 
+  154:     async exchangeAuthorizationCode(
+  155:         client: OAuthClientInformationFull,
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/packages/server/src/server/mcp.examples.ts:138  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  137:             await ctx.mcpReq.log('info', `Fetching ${url}`);
+  138:             const res = await fetch(url);
+  139:             await ctx.mcpReq.log('debug', `Response status: ${res.status}`);
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/scripts/fetch-schema-twins.ts:54  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  53:     const url = `https://raw.githubusercontent.com/${SPEC_REPO}/${sha}/${upstreamPath}`;
+  54:     const response = await fetch(url);
+  55:     if (!response.ok) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/scripts/fetch-spec-examples.ts:46  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  45:     const url = `https://api.github.com/repos/${SPEC_REPO}/git/trees/${sha}?recursive=1`;
+  46:     const response = await fetch(url);
+  47:     if (!response.ok) throw new Error(`Failed to fetch repo tree: ${response.status} ${response.statusText}`);
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/scripts/fetch-spec-examples.ts:60  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  59:         const url = `https://raw.githubusercontent.com/${SPEC_REPO}/${sha}/${EXAMPLES_PATH}/${relPath}`;
+  60:         const response = await fetch(url);
+  61:         if (!response.ok) throw new Error(`Failed to fetch ${relPath}: ${response.status} ${response.statusText}`);
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/scripts/fetch-spec-types.ts:49  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  48: 
+  49:     const response = await fetch(url);
+  50:     if (!response.ok) {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  /home/lhmisme/vata/triage/modelcontextprotocol-typescript-sdk/scripts/fetch-spec-types.ts:65  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  64: 
+  65:     const response = await fetch(url);
+  66:     if (!response.ok) {
+
+55 finding(s).

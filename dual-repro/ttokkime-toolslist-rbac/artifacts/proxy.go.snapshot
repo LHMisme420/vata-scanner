@@ -1,0 +1,270 @@
+// Package proxy is the heart of the gateway: it assembles the middleware chain
+// (auth → rate limit → RBAC → circuit breaker → reverse proxy → redaction →
+// audit) around one httputil.ReverseProxy per upstream MCP server.
+//
+// Design notes:
+//   - The request body is peeked once to extract the JSON-RPC method and tool
+//     name for RBAC, then restored so the reverse proxy forwards it intact.
+//   - SSE responses (text/event-stream) are streamed through with immediate
+//     flushing; JSON responses are buffered so PII redaction can run on the full
+//     body. Redacting across SSE chunk boundaries is called out as future work.
+//   - Circuit-breaker outcomes are recorded in ModifyResponse (got a response)
+//     and ErrorHandler (transport failure), so every upstream attempt updates
+//     breaker state exactly once.
+package proxy
+
+import (
+	"bytes"
+	"context"
+	"crypto/rand"
+	"encoding/hex"
+	"encoding/json"
+	"io"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
+	"strconv"
+	"strings"
+	"time"
+
+	"github.com/Ttokkime/mcp-gateway/internal/audit"
+	"github.com/Ttokkime/mcp-gateway/internal/auth"
+	"github.com/Ttokkime/mcp-gateway/internal/circuit"
+	"github.com/Ttokkime/mcp-gateway/internal/config"
+	"github.com/Ttokkime/mcp-gateway/internal/mcp"
+	"github.com/Ttokkime/mcp-gateway/internal/ratelimit"
+	"github.com/Ttokkime/mcp-gateway/internal/redact"
+)
+
+// upstreamProxy bundles a reverse proxy with its guarding breaker.
+type upstreamProxy struct {
+	name    string
+	rp      *httputil.ReverseProxy
+	breaker *circuit.Breaker
+}
+
+// Gateway is an http.Handler implementing the full middleware chain.
+type Gateway struct {
+	auth      auth.Authenticator
+	limiter   *ratelimit.Limiter
+	redactor  *redact.Redactor
+	audit     *audit.Logger
+	upstreams map[string]*upstreamProxy
+}
+
+// ctxKey namespaces the per-request state stored on the request context so the
+// ReverseProxy hooks (ModifyResponse/ErrorHandler) can reach the breaker and
+// audit entry for the in-flight request.
+type ctxKey struct{}
+
+type reqState struct {
+	breaker  *circuit.Breaker
+	entry    *audit.Entry
+	redactor *redact.Redactor
+}
+
+// New builds a Gateway from validated config plus its collaborators.
+func New(cfg *config.Config, a auth.Authenticator, r *redact.Redactor, al *audit.Logger) (*Gateway, error) {
+	g := &Gateway{
+		auth:      a,
+		limiter:   ratelimit.New(),
+		redactor:  r,
+		audit:     al,
+		upstreams: make(map[string]*upstreamProxy),
+	}
+	for name, up := range cfg.Upstreams {
+		target, err := url.Parse(up.URL)
+		if err != nil {
+			return nil, err
+		}
+		br := circuit.New(up.Breaker.FailureThreshold,
+			time.Duration(up.Breaker.OpenMS)*time.Millisecond)
+
+		rp := &httputil.ReverseProxy{
+			Rewrite: func(pr *httputil.ProxyRequest) {
+				pr.SetURL(target)
+				// SetURL *joins* the inbound path onto the target path, which would
+				// turn inbound /mcp + upstream /mcp into /mcp/mcp. The gateway
+				// exposes a single /mcp entrypoint and forwards every request to the
+				// upstream's configured endpoint path exactly, so pin it here.
+				pr.Out.URL.Path = target.Path
+				pr.Out.URL.RawPath = target.RawPath
+				pr.Out.Host = target.Host
+			},
+			// FlushInterval -1 flushes writes immediately, which is required for
+			// SSE streaming responses to reach the agent without buffering.
+			FlushInterval:  -1,
+			ModifyResponse: modifyResponse,
+			ErrorHandler:   errorHandler,
+			Transport: &http.Transport{
+				ResponseHeaderTimeout: up.Timeout(),
+				MaxIdleConnsPerHost:   64,
+			},
+		}
+		g.upstreams[name] = &upstreamProxy{name: name, rp: rp, breaker: br}
+	}
+	return g, nil
+}
+
+func newRequestID() string {
+	var b [8]byte
+	_, _ = rand.Read(b[:])
+	return hex.EncodeToString(b[:])
+}
+
+func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
+	entry := &audit.Entry{RequestID: newRequestID()}
+
+	// 1. Authenticate → tenant policy.
+	tenantKey, tenant, err := g.auth.Authenticate(r)
+	if err != nil {
+		entry.Decision = audit.DeniedAuth
+		g.finish(w, r, entry, start, http.StatusUnauthorized, mcp.CodeUnauthorized, "unauthorized", nil)
+		return
+	}
+	entry.Tenant = tenant.Name
+	entry.Upstream = tenant.Upstream
+
+	// 2. Per-tenant rate limit.
+	if !g.limiter.Allow(tenantKey, tenant.RateLimit.RPS, tenant.RateLimit.Burst) {
+		entry.Decision = audit.DeniedRate
+		g.finish(w, r, entry, start, http.StatusTooManyRequests, mcp.CodeRateLimited, "rate limit exceeded", nil)
+		return
+	}
+
+	// 3. Peek the JSON-RPC frame for method + tool, then restore the body.
+	body, _ := io.ReadAll(io.LimitReader(r.Body, 8<<20)) // 8 MiB cap
+	_ = r.Body.Close()
+	var req mcp.Request
+	_ = json.Unmarshal(body, &req)
+	entry.Method = req.Method
+
+	var reqID json.RawMessage = req.ID
+	if req.Method == mcp.MethodToolsCall {
+		var p mcp.ToolCallParams
+		_ = json.Unmarshal(req.Params, &p)
+		entry.Tool = p.Name
+		if !tenant.ToolAllowed(p.Name) {
+			entry.Decision = audit.DeniedRBAC
+			g.finish(w, r, entry, start, http.StatusForbidden, mcp.CodeUnauthorized,
+				"tool not permitted: "+p.Name, reqID)
+			return
+		}
+	}
+
+	// 4. Resolve upstream + circuit breaker.
+	up, ok := g.upstreams[tenant.Upstream]
+	if !ok {
+		entry.Decision = audit.UpstreamErr
+		g.finish(w, r, entry, start, http.StatusBadGateway, mcp.CodeUpstreamDown, "unknown upstream", reqID)
+		return
+	}
+	if !up.breaker.Allow() {
+		entry.Decision = audit.BreakerOpen
+		g.finish(w, r, entry, start, http.StatusServiceUnavailable, mcp.CodeUpstreamDown,
+			"upstream unavailable (circuit open)", reqID)
+		return
+	}
+
+	// 5. Restore body and proxy. State on the context lets the ReverseProxy hooks
+	//    update breaker + audit for this request.
+	r.Body = io.NopCloser(bytes.NewReader(body))
+	r.ContentLength = int64(len(body))
+	entry.Decision = audit.Allowed
+	st := &reqState{breaker: up.breaker, entry: entry, redactor: g.redactor}
+	ctx := context.WithValue(r.Context(), ctxKey{}, st)
+
+	sw := &statusWriter{ResponseWriter: w, status: http.StatusOK}
+	up.rp.ServeHTTP(sw, r.WithContext(ctx))
+
+	entry.StatusCode = sw.status
+	entry.LatencyMS = msSince(start)
+	g.audit.Log(*entry)
+}
+
+// finish writes a JSON-RPC (or plain) error response and logs the audit entry
+// for requests rejected before reaching an upstream.
+func (g *Gateway) finish(w http.ResponseWriter, r *http.Request, e *audit.Entry, start time.Time,
+	httpStatus, rpcCode int, msg string, id json.RawMessage) {
+
+	e.StatusCode = httpStatus
+	e.LatencyMS = msSince(start)
+	g.audit.Log(*e)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(httpStatus)
+	_ = json.NewEncoder(w).Encode(mcp.NewError(id, rpcCode, msg))
+}
+
+// modifyResponse records breaker success/failure and redacts JSON bodies.
+func modifyResponse(resp *http.Response) error {
+	st, _ := resp.Request.Context().Value(ctxKey{}).(*reqState)
+	if st == nil {
+		return nil
+	}
+	// 5xx from upstream counts as a failure for the breaker; everything else is
+	// a success (the upstream is alive and answering).
+	if resp.StatusCode >= 500 {
+		st.breaker.Failure()
+		st.entry.Decision = audit.UpstreamErr
+	} else {
+		st.breaker.Success()
+	}
+
+	// Redact only non-streaming JSON. SSE is streamed through untouched — see
+	// docs/ARCHITECTURE.md "Streaming redaction" for the boundary problem.
+	ct := resp.Header.Get("Content-Type")
+	if strings.HasPrefix(ct, "text/event-stream") {
+		return nil
+	}
+	if st.redactor != nil && strings.HasPrefix(ct, "application/json") {
+		raw, err := io.ReadAll(resp.Body)
+		_ = resp.Body.Close()
+		if err != nil {
+			return err
+		}
+		clean := st.redactor.Apply(raw)
+		resp.Body = io.NopCloser(bytes.NewReader(clean))
+		resp.ContentLength = int64(len(clean))
+		resp.Header.Set("Content-Length", strconv.Itoa(len(clean)))
+	}
+	return nil
+}
+
+// errorHandler fires when the upstream is unreachable (transport error). It
+// trips the breaker and returns a JSON-RPC upstream-down error.
+func errorHandler(w http.ResponseWriter, r *http.Request, err error) {
+	if st, _ := r.Context().Value(ctxKey{}).(*reqState); st != nil {
+		st.breaker.Failure()
+		st.entry.Decision = audit.UpstreamErr
+		st.entry.Err = err.Error()
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusBadGateway)
+	_ = json.NewEncoder(w).Encode(mcp.NewError(nil, mcp.CodeUpstreamDown, "upstream error"))
+}
+
+// statusWriter captures the status code written by the ReverseProxy for audit.
+type statusWriter struct {
+	http.ResponseWriter
+	status      int
+	wroteHeader bool
+}
+
+func (s *statusWriter) WriteHeader(code int) {
+	if !s.wroteHeader {
+		s.status = code
+		s.wroteHeader = true
+	}
+	s.ResponseWriter.WriteHeader(code)
+}
+
+// Flush propagates flushes so SSE streaming works through the wrapper.
+func (s *statusWriter) Flush() {
+	if f, ok := s.ResponseWriter.(http.Flusher); ok {
+		f.Flush()
+	}
+}
+
+func msSince(t time.Time) float64 { return float64(time.Since(t).Microseconds()) / 1000.0 }

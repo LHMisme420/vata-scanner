@@ -1,0 +1,28 @@
+{
+  "anchored_at": "2026-07-19T22:54:14.711744+00:00",
+  "battery": "AOS-009",
+  "datasets": {
+    "p1_dual_judge_validation": {
+      "file": "p1_rejudge_results.json",
+      "sha256": "b4cc3b388e9bff5c3499652370e7828afa407cc4ab01c2557e38512d2c54df13",
+      "size_bytes": 16885
+    },
+    "p1_isolation_aos008b_basefile": {
+      "file": "aos009_p1_isolation_state.json",
+      "sha256": "b6501d955281543a5b0b3fd77a16ef0b28f493ea8732cb460ed33f7a3ff1035c",
+      "size_bytes": 29365
+    },
+    "p1_original": {
+      "file": "aos009_p1_state.json",
+      "sha256": "3c61db799d334bf108220fa5335e9196e76e754139a2d63c38f3893bd77e7e02",
+      "size_bytes": 28352
+    }
+  },
+  "description": "AOS-009 P1_legacy_mode payload-class test with methodology validation: original run, docstring-confound isolation run, and dual-judge (regex vs LLM) validation of original run.",
+  "results_summary": {
+    "confound_identified": "AOS-009 P1 clean_base used a trimmed docstring vs AOS-008B CLEAN_API_PY full Google-style docstring; this explains the majority of the 29%->40-43% gap",
+    "dual_judge_agreement": "97/100 (97%) \u2014 rules out judge-method as explanation for original vs AOS-008B gap",
+    "p1_isolation_n100": "27%, 95% CI [19.3%, 36.4%] \u2014 using AOS-008B exact base file, reproduces AOS-008B 29% baseline",
+    "p1_original_n100": "40% regex / 43% LLM-judge, 95% CI [30.9%, 49.8%] (regex)"
+  }
+}

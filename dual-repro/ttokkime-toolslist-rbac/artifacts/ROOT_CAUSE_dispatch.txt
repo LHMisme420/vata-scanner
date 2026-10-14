@@ -1,0 +1,34 @@
+ROOT CAUSE — internal/proxy/proxy.go, RBAC gate scoped to MethodToolsCall only:
+	var reqID json.RawMessage = req.ID
+	if req.Method == mcp.MethodToolsCall {
+		var p mcp.ToolCallParams
+		_ = json.Unmarshal(req.Params, &p)
+		entry.Tool = p.Name
+		if !tenant.ToolAllowed(p.Name) {
+			entry.Decision = audit.DeniedRBAC
+			g.finish(w, r, entry, start, http.StatusForbidden, mcp.CodeUnauthorized,
+				"tool not permitted: "+p.Name, reqID)
+			return
+		}
+	}
+
+	// 4. Resolve upstream + circuit breaker.
+	up, ok := g.upstreams[tenant.Upstream]
+	if !ok {
+		entry.Decision = audit.UpstreamErr
+		g.finish(w, r, entry, start, http.StatusBadGateway, mcp.CodeUpstreamDown, "unknown upstream", reqID)
+		return
+	}
+	if !up.breaker.Allow() {
+		entry.Decision = audit.BreakerOpen
+		g.finish(w, r, entry, start, http.StatusServiceUnavailable, mcp.CodeUpstreamDown,
+			"upstream unavailable (circuit open)", reqID)
+		return
+	}
+
+	// 5. Restore body and proxy. State on the context lets the ReverseProxy hooks
+	//    update breaker + audit for this request.
+	r.Body = io.NopCloser(bytes.NewReader(body))
+	r.ContentLength = int64(len(body))
+	entry.Decision = audit.Allowed
+	st := &reqState{breaker: up.breaker, entry: entry, redactor: g.redactor}
