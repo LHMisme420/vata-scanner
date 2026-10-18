@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-import time
+import json
 
 app = Flask(__name__)
 
@@ -10,61 +10,69 @@ def cors(response):
     response.headers['Access-Control-Allow-Headers'] = '*'
     return response
 
-# Endpoint 1: Unauthenticated tool access (zero-auth)
+# 1. Zero-auth tools
 @app.route('/tools')
 def tools():
-    return jsonify({'tools': [
-        {'name': 'bash', 'description': 'Execute arbitrary commands'},
-        {'name': 'read', 'description': 'Read files'},
-        {'name': 'write', 'description': 'Write files'},
-        {'name': 'exec', 'description': 'Execute binaries'}
-    ]})
+    return jsonify({
+        'tools': [
+            {'name': 'bash', 'description': 'Execute shell commands', 'auth': 'none'},
+            {'name': 'read', 'description': 'Read files on system', 'auth': 'none'},
+            {'name': 'write', 'description': 'Write files to disk', 'auth': 'none'}
+        ]
+    }), 200
 
-# Endpoint 2: Unauthenticated schema disclosure
+# 2. Schema disclosure
 @app.route('/openapi.json')
 def schema():
     return jsonify({
         'openapi': '3.0.0',
-        'info': {'title': 'MCP Tools API', 'version': '1.0'},
+        'info': {'title': 'Vulnerable API', 'version': '1.0'},
         'paths': {
-            '/bash': {'post': {'operationId': 'execute_bash'}},
-            '/read': {'post': {'operationId': 'read_file'}},
-            '/admin/config': {'get': {'operationId': 'get_admin_config'}}
+            '/admin/users': {'get': {'operationId': 'list_users', 'security': []}},
+            '/admin/config': {'get': {'operationId': 'get_config', 'security': []}},
+            '/api/token': {'post': {'operationId': 'generate_token', 'security': []}}
         }
-    })
+    }), 200
 
-# Endpoint 3: CORS wildcard (already in after_request, but explicit here)
+# 3. CORS wildcard
 @app.route('/data')
 def data():
-    return jsonify({'sensitive_data': 'api_key=sk-1234567890'})
+    return jsonify({
+        'api_keys': ['sk-1234567890abcdef', 'sk-0987654321fedcba'],
+        'database_url': 'postgresql://admin:password@db.internal:5432/prod',
+        'internal_ips': ['10.0.1.5', '10.0.2.10']
+    }), 200
 
-# Endpoint 4: Missing rate limiting (DoS vector)
+# 4. No rate limiting
 @app.route('/compute', methods=['POST'])
 def compute():
-    # No rate limit, no auth
-    for _ in range(100000):
-        _ = 1 + 1
-    return jsonify({'result': 'computed'})
+    return jsonify({'result': 'computed', 'time': '0.001s'}), 200
 
-# Endpoint 5: Token bypass (hardcoded bypass)
+# 5. Token bypass
 @app.route('/api/admin', methods=['GET'])
 def admin():
     token = request.headers.get('Authorization', '')
     if token == 'Bearer test':
-        return jsonify({'admin': False})  # Bypass: token check does nothing
-    return jsonify({'admin': True, 'secret': 'FLAG{admin_bypass}'})
+        return jsonify({'status': 'unauthorized'}), 401
+    return jsonify({
+        'admin': True,
+        'users': [{'id': 1, 'email': 'admin@internal.com', 'role': 'superuser'}],
+        'flag': 'FLAG{token_validation_bypassed}'
+    }), 200
 
-# Endpoint 6: Missing isolation (cross-user data leak)
-users = {'user1': {'email': 'user1@test.com'}, 'user2': {'email': 'user2@test.com'}}
-
+# 6. Missing isolation
 @app.route('/profile/<user_id>')
 def profile(user_id):
-    # No auth, direct access to any user
-    return jsonify(users.get(user_id, {'error': 'not found'}))
+    users = {
+        '1': {'id': 1, 'name': 'Alice', 'email': 'alice@test.com', 'ssn': '123-45-6789'},
+        '2': {'id': 2, 'name': 'Bob', 'email': 'bob@test.com', 'ssn': '987-65-4321'},
+        '3': {'id': 3, 'name': 'Admin', 'email': 'admin@internal.com', 'ssn': '555-55-5555'}
+    }
+    return jsonify(users.get(user_id, {'error': 'not found'})), 200
 
 @app.route('/health')
 def health():
-    return jsonify({'status': 'ok'})
+    return jsonify({'status': 'ok'}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5001)
