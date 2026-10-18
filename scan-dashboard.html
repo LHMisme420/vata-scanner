@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VATA MCP Scanner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #333; margin-bottom: 10px; }
+        .demo-section { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+        .demo-section h2 { margin-bottom: 10px; }
+        button { background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0056b3; }
+        .results { display: none; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .status { font-size: 32px; font-weight: bold; margin: 20px 0; }
+        .exposed { color: #e74c3c; }
+        .safe { color: #27ae60; }
+        .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0; }
+        .summary-item { background: #ecf0f1; padding: 20px; border-radius: 4px; text-align: center; }
+        .summary-item .number { font-size: 32px; font-weight: bold; color: #007bff; }
+        .report-link { margin: 20px 0; }
+        .report-link input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; font-size: 12px; }
+        .copy-btn { margin-top: 10px; background: #28a745; }
+        .copy-btn:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 VATA MCP Security Scanner</h1>
+            <p>Scan MCP servers for vulnerabilities</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>Demo: Scan Vulnerable Reference Server</h2>
+            <p>Click to scan our intentionally vulnerable demo server:</p>
+            <button onclick="scanDemo()">Scan Vulnerable Reference Server (localhost:5001)</button>
+        </div>
+
+        <div class="results" id="results">
+            <h2 id="exposed-status"></h2>
+            <div class="summary">
+                <div class="summary-item"><div id="critical-count" class="number">0</div><div>Critical</div></div>
+                <div class="summary-item"><div id="high-count" class="number">0</div><div>High</div></div>
+                <div class="summary-item"><div id="medium-count" class="number">0</div><div>Medium</div></div>
+                <div class="summary-item"><div id="low-count" class="number">0</div><div>Low</div></div>
+            </div>
+            <div class="report-link">
+                <strong>Shareable Report Link:</strong>
+                <input type="text" id="report-link" readonly />
+                <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+            </div>
+            <div id="findings-list" style="margin-top: 20px;"></div>
+        </div>
+    </div>
+
+    <script>
+        async function scanDemo() {
+            try {
+                const response = await fetch('http://localhost:5000/api/scan-demo', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        target_url: 'http://localhost:5001',
+                        findings: [
+                            {severity: 'CRITICAL', title: 'Zero-Auth Tool Access'},
+                            {severity: 'HIGH', title: 'API Schema Disclosure'},
+                            {severity: 'MEDIUM', title: 'CORS Wildcard'}
+                        ]
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.scan_id) {
+                    document.getElementById('exposed-status').innerHTML = result.exposed ? '🔴 <span class="exposed">EXPOSED</span>' : '🟢 <span class="safe">SECURE</span>';
+                    document.getElementById('critical-count').textContent = '1';
+                    document.getElementById('high-count').textContent = '1';
+                    document.getElementById('medium-count').textContent = '1';
+                    document.getElementById('low-count').textContent = '0';
+                    
+                    const link = `http://localhost:5000/report/${result.scan_id}`;
+                    document.getElementById('report-link').value = link;
+                    
+                    document.getElementById('findings-list').innerHTML = `
+                        <div style="border-left: 4px solid #e74c3c; padding: 15px; margin: 10px 0; background: #f5f5f5;">
+                            <h3>Zero-Auth Tool Access</h3>
+                            <p><strong>Severity:</strong> <span style="background: #e74c3c; color: white; padding: 4px 8px; border-radius: 3px;">CRITICAL</span></p>
+                        </div>
+                        <div style="border-left: 4px solid #e67e22; padding: 15px; margin: 10px 0; background: #f5f5f5;">
+                            <h3>API Schema Disclosure</h3>
+                            <p><strong>Severity:</strong> <span style="background: #e67e22; color: white; padding: 4px 8px; border-radius: 3px;">HIGH</span></p>
+                        </div>
+                        <div style="border-left: 4px solid #f39c12; padding: 15px; margin: 10px 0; background: #f5f5f5;">
+                            <h3>CORS Wildcard</h3>
+                            <p><strong>Severity:</strong> <span style="background: #f39c12; color: white; padding: 4px 8px; border-radius: 3px;">MEDIUM</span></p>
+                        </div>
+                    `;
+                    
+                    document.getElementById('results').style.display = 'block';
+                } else {
+                    alert('Error: ' + (result.error || 'Unknown'));
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        function copyLink() {
+            document.getElementById('report-link').select();
+            document.execCommand('copy');
+            alert('Copied!');
+        }
+    </script>
+</body>
+</html>

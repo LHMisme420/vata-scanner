@@ -1,0 +1,5 @@
+usage: mcp_authscan.py [-h] [--json] [--html] [--sarif] [--include-tests]
+                       [--exclude DIR] [--output FILE]
+                       [--fail-on {critical,high,medium}]
+                       target
+mcp_authscan.py: error: unrecognized arguments: --exclude-tests

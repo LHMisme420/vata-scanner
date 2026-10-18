@@ -1,0 +1,122 @@
+[*] Scanning source code directory
+skipped 215 test/fixture path(s); pass --include-tests to scan them
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  hydra/client/manager_test_helpers.go:85  (VATA:lucky-aeon default admin creds)
+  Secret:            "secret-new"
+  84: 		Name:              "name-new",
+  85: 		Secret:            "secret-new",
+  86: 		RedirectURIs:      []string{"http://redirect/new"},
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  hydra/internal/fosite_store.go:27  (VATA:lucky-aeon default admin creds)
+  Secret:        "encoded&password"
+  26: 			ID:            "encoded:client",
+  27: 			Secret:        "encoded&password",
+  28: 			RedirectURIs:  []string{"http://localhost:3846/callback"},
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  hydra/internal/kratos/fake_kratos.go:24  (VATA:lucky-aeon default admin creds)
+  Password   = "fake-kratos-password"
+  23: 	FakeUsername   = "fake-kratos-username"
+  24: 	FakePassword   = "fake-kratos-password" // nolint: gosec
+  25: 	FakeIdentityID = "fake-kratos-identity-id"
+
+[CRITICAL/HIGH] A2  Hardcoded default credential literal
+  hydra/oryx/cmdx/pagination.go:15  (VATA:lucky-aeon default admin creds)
+  Token = "page-token"
+  14: 	FlagPageSize  = "page-size"
+  15: 	FlagPageToken = "page-token"
+  16: )
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/cmd/cmd_perform_device_flow.go:204  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: acceptURL
+  203: 	}
+  204: 	req, err := http.NewRequestWithContext(r.Context(), http.MethodPut, acceptURL, bytes.NewReader(body))
+  205: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/consent/strategy_default.go:752  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: t.url
+  751: 
+  752: 		req, err := retryablehttp.NewRequestWithContext(ctx, "POST", t.url, []byte(body))
+  753: 		if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/cypress/helpers/index.js:16  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: Cypress.env("admin_url"
+  15: export const findEndUserAuthorization = (subject) =>
+  16:   fetch(
+  17:     Cypress.env("admin_url") +
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/cypress/helpers/index.js:25  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: Cypress.env("admin_url"
+  24: export const revokeEndUserAuthorization = (subject) =>
+  25:   fetch(
+  26:     Cypress.env("admin_url") +
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/fosite/integration/clients/introspect.go:83  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.endpointURL
+  82: ) (*http.Request, error) {
+  83: 	request, err := http.NewRequestWithContext(ctx, "POST", c.endpointURL, strings.NewReader(data.Encode()))
+  84: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/fosite/integration/clients/jwt_bearer.go:82  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: c.tokenURL
+  81: 
+  82: 	request, err := http.NewRequestWithContext(ctx, "POST", c.tokenURL, requestBodyReader)
+  83: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/internal/httpclient/client.go:409  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url.String(
+  408: 	if body != nil {
+  409: 		localVarRequest, err = http.NewRequest(method, url.String(), body)
+  410: 	} else {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/internal/httpclient/client.go:411  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url.String(
+  410: 	} else {
+  411: 		localVarRequest, err = http.NewRequest(method, url.String(), nil)
+  412: 	}
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/oauth2/token_hook.go:93  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: hookConfig.URL
+  92: func executeHookAndUpdateSession(ctx context.Context, reg httpx.ClientProvider, hookConfig *config.HookConfig, reqBodyBytes []byte, session *Session) error {
+  93: 	req, err := retryablehttp.NewRequestWithContext(ctx, http.MethodPost, hookConfig.URL, bytes.NewReader(reqBodyBytes))
+  94: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/oryx/httpx/request.go:23  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  22: 	}
+  23: 	req, err := http.NewRequest(method, url, &b)
+  24: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/oryx/httpx/request.go:33  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  32: func NewRequestForm(method, url string, data url.Values) (*http.Request, error) {
+  33: 	req, err := http.NewRequest(method, url, strings.NewReader(data.Encode()))
+  34: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/oryx/httpx/request.go:43  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: url
+  42: func MustNewRequest(method, url string, body io.Reader, contentType string) *http.Request {
+  43: 	req, err := http.NewRequest(method, url, body)
+  44: 	if err != nil {
+
+[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
+  hydra/oryx/httpx/wait_for.go:25  (VATA:mcpjungle OAuth DCR SSRF)
+  url arg: endpoint
+  24: 	return retry.Do(func() error {
+  25: 		req, err := http.NewRequestWithContext(ctx, "GET", endpoint, nil)
+  26: 		if err != nil {
+
+17 finding(s).

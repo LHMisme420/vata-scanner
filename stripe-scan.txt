@@ -1,9 +1,3 @@
-skipped 76 test/fixture path(s); pass --include-tests to scan them
-[MEDIUM/LOW] A4  SSRF surface: outbound request to non-literal URL, no guard in function (review each)
-  stripe-sdk/stripe/_http_client.py:779  (VATA:mcpjungle OAuth DCR SSRF)
-  url arg: url=url
-  778:         try:
-  779:             result = self.urlfetch.fetch(
-  780:                 url=url,
-
-1 finding(s).
+[*] Scanning source code directory
+No findings. (Absence of finding is not proof of safety.)
+0 finding(s).
