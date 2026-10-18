@@ -112,13 +112,12 @@ def view_report(slug):
     findings_raw = c.fetchall()
     conn.close()
     
-    # Sort by severity
     findings = sorted(findings_raw, key=lambda x: severity_order(x[1]))
     
     colors = {'CRITICAL': '#e74c3c', 'HIGH': '#e67e22', 'MEDIUM': '#f39c12', 'LOW': '#3498db'}
     status_emoji = "🔴 EXPOSED" if scan[8] else "🟢 SECURE"
     duration_str = f"{round(float(scan[10]), 2)}"
-    created_at = scan[12][:10]
+    created_at = scan[11][:10]
     
     html = f'''<!DOCTYPE html>
 <html>
